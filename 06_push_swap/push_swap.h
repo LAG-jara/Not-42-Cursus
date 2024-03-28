@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/25 11:20:58 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/28 11:17:17 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,7 @@ int		procargv(char **av, t_stack **stacka);
 
 int		stacksize(t_stack **a);
 int		initpri(t_stack **a, t_stack **b);
+
+//temp
+void	printloops(t_stack **lista, t_stack **listb);
 #endif

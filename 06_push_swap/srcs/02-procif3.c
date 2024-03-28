@@ -6,13 +6,36 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/27 07:11:59 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/03/28 11:20:21 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	tgtval(t_stack **a, t_stack *b);
+int	tgtval(t_stack **a, t_stack *b)
+{
+	t_stack	*tmp;
+	int		low;
+
+	low = numax(a);
+	tmp = *a;
+	if ((b->nu > numax(a) || b->nu < numin(a)))
+		return (numin(a));
+	while (tmp->n != *a)
+	{
+		if (tmp->nu < low && b->nu < tmp->nu)
+			low = tmp->nu;
+		tmp = tmp->n;
+	}
+	tmp = tmp->n;
+	if (tmp->nu < low && b->nu < tmp->nu)
+		low = tmp->nu;
+	return (low);
+}
+
+int	cheapest(t_stack **a, t_stack *b)
+{
+}
 
 void	init3(t_stack **a)
 {
@@ -53,6 +76,8 @@ void	init5(t_stack **a, t_stack **b)
 		pb(a, b);
 	init3(a);
 	ft_printf("Targetnode is %d\n", tgtval(a, *b));
+	ft_printf("Targetnodeb2a is %d\n", tgtval(b, *a));
+	printloops(a, b);
 	if (stacksortedrev(b))
 		sb(b);
 	while (*b)
@@ -73,67 +98,6 @@ void	init5(t_stack **a, t_stack **b)
 	while (stacksorted(a) && (*a)->nu > numin(a))
 		rra(a);
 }
-/*
-void	initall(t_stack **a, t_stack **b)
-{
-	(void)(pb(a, b), pb(a, b));
-//	if (stacksortedrev(b))
-//		sb(b);
-	while (stacksize(a) > 3)
-	{
-		while (stepsreq(indexa2b(a, b), b) > 0)
-			rb(b);
-		while (stepsreq(indexa2b(a, b), b) < 0)
-			rrb(b);
-		if (!stepsreq(indexa2b(a, b), b) && ((!stacksortedrev(b) && \
-		((*a)->nu < numin(b) || (*a)->nu > numax(b))) || \
-		((*a)->nu > (*b)->nu && (*a)->nu < (*b)->p->nu)))
-			pb(a, b);
-		else if ((*a)->nu < mediannode(b)->nu)
-			rb(b);
-		else
-			rrb(b);
-	}
-//	while (stacksortedrev(b) && (*b)->nu != numax(b))
-//		rrb(b);
-	init5(a, b);
-}*/
-
-int	tgtval(t_stack **a, t_stack *b)
-{
-	t_stack	*tmp;
-
-	tmp = *a;
-	if ((b->nu > numax(a) || b->nu < numin(a)))
-		return (numin(a));
-	while (b->nu > tmp->nu)
-		tmp = tmp->n;
-	return (tmp->nu);
-}
-/*
-void	cheapb2a(t_stack **a, t_stack **b)
-{
-	t_stack	*tmp;
-	t_stack	*tgt;
-	int		best;
-
-	while (*b)
-	{
-		best = 10000;
-		tmp = *a;
-		while (tmp)
-		{
-			if (tmp->nu > (*b)->nu && tmp->nu < best)
-			{
-				best = tmp->nu;
-				tgt = tmp;
-			}
-			tmp = tmp->n;
-		}
-		if 
-	}
-	
-}*/
 
 int	initpri(t_stack **a, t_stack **b)
 {
