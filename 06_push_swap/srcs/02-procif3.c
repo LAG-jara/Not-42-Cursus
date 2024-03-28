@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/28 14:44:27 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/28 15:23:24 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,29 @@ void	init3(t_stack **a)
 	}
 }*/
 
+//presort fn to do light sorting for b so is cheaper later, if cur *a can be sorted within size /2 moves, do it.
+void	presortb(t_stack **a, t_stack **b)
+{
+	while (!*b || stacksize(b) < 2)
+		pb(a, b);
+//	ft_printf("tgtval %d\n", tgtval(b, *a));
+	if (((*a)->nu > numax(b) && (*b)->nu == numax(b)) || \
+	((*b)->p->nu == tgtval(b, *a)))
+		pb(a, b);
+	else if (nodepos(b, tgtval(b, *a)) < stacksize(b))
+		rb(b);
+	else
+		rrb(b);
+//	printloops(a, b);
+}
+
 void	init5(t_stack **a, t_stack **b)
 {
 	while (stacksize(a) > 3)
-		pb(a, b);
+		presortb(a, b);
 	init3(a);
-	if (stacksortedrev(b))
-		sb(b);
+//	if (stacksortedrev(b))
+//		sb(b);
 	while (*b)
 	{
 //	printloops(a, b);
