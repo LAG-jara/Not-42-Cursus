@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/28 11:20:21 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/28 11:52:15 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,33 @@ int	tgtval(t_stack **a, t_stack *b)
 	return (low);
 }
 
-int	cheapest(t_stack **a, t_stack *b)
+int	nodepos(t_stack **a, int val)
 {
+	t_stack	*tmp;
+	int		i;
+
+	tmp = *a;
+	i = 1;
+	while (tmp->nu != val)
+	{
+		tmp = tmp->n;
+		i++;
+	}
+	return (i);
+}
+
+t_stack	cheapest(t_stack **a, t_stack *b)
+{
+	t_stack	*tmp;
+	int		steps;
+	int		count;
+
+	tmp = *b;
+	steps = 99999999;
+	while (tmp->n != *b)
+	{
+		count = nodepos(
+	}
 }
 
 void	init3(t_stack **a)
@@ -77,11 +102,14 @@ void	init5(t_stack **a, t_stack **b)
 	init3(a);
 	ft_printf("Targetnode is %d\n", tgtval(a, *b));
 	ft_printf("Targetnodeb2a is %d\n", tgtval(b, *a));
+	ft_printf("Nodepos is %d\n", nodepos(a, tgtval(a, *b)));
 	printloops(a, b);
 	if (stacksortedrev(b))
 		sb(b);
 	while (*b)
 	{
+//	if (nodepos(a, tgtval(a, *b)) > 1 && nodepos(b, cheapest) > 1)
+//		rr(a, b);
 		while (stepsreq(indexb2a(a, b), a) > 0)
 			ra(a);
 		while (stepsreq(indexb2a(a, b), a) < 0)
