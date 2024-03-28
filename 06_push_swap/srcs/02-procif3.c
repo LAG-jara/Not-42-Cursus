@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/28 15:42:02 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/28 15:49:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void	init5(t_stack **a, t_stack **b)
 		sb(b);
 	while (*b)
 	{
-//	ft_printf("Target is %d, nodepos is %d, cheapest is %d\n", tgtval(a, *b), nodepos(a, tgtval(a, *b)), cheapest(a, b));
 		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
 		((*b)->nu < numin(a) || (*b)->nu > numax(a))) || \
 		((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
@@ -137,6 +136,15 @@ void	init5(t_stack **a, t_stack **b)
 		rra(a);
 }
 
+void	initall(t_stack **a, t_stack **b)
+{
+	while (stacksize(a) > 3)
+		pb(a, b);
+	init3(a);
+	init5(a, b);
+//	ft_printf("Target is %d, nodepos is %d, cheapest is %d\n", tgtval(a, *b), nodepos(a, tgtval(a, *b)), cheapest(a, b));
+}
+
 int	initpri(t_stack **a, t_stack **b)
 {
 	if (!a || !*a || !b || !stacksorted(a))
@@ -144,6 +152,6 @@ int	initpri(t_stack **a, t_stack **b)
 	if (stacksize(a) < 6)
 		init5(a, b);
 	else
-		init5(a, b);
+		initall(a, b);
 	return (0);
 }
