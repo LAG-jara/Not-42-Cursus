@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/28 15:23:24 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/28 15:42:02 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,50 +114,27 @@ void	init3(t_stack **a)
 	}
 }*/
 
-//presort fn to do light sorting for b so is cheaper later, if cur *a can be sorted within size /2 moves, do it.
-void	presortb(t_stack **a, t_stack **b)
-{
-	while (!*b || stacksize(b) < 2)
-		pb(a, b);
-//	ft_printf("tgtval %d\n", tgtval(b, *a));
-	if (((*a)->nu > numax(b) && (*b)->nu == numax(b)) || \
-	((*b)->p->nu == tgtval(b, *a)))
-		pb(a, b);
-	else if (nodepos(b, tgtval(b, *a)) < stacksize(b))
-		rb(b);
-	else
-		rrb(b);
-//	printloops(a, b);
-}
-
 void	init5(t_stack **a, t_stack **b)
 {
 	while (stacksize(a) > 3)
-		presortb(a, b);
+		pb(a, b);
 	init3(a);
-//	if (stacksortedrev(b))
-//		sb(b);
+	if (stacksize(b) == 2 && stacksortedrev(b))
+		sb(b);
 	while (*b)
 	{
-//	printloops(a, b);
 //	ft_printf("Target is %d, nodepos is %d, cheapest is %d\n", tgtval(a, *b), nodepos(a, tgtval(a, *b)), cheapest(a, b));
-		while (stepsreq(indexb2a(a, b), a) > 0)
-			ra(a);
-		while (stepsreq(indexb2a(a, b), a) < 0)
-			rra(a);
 		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
 		((*b)->nu < numin(a) || (*b)->nu > numax(a))) || \
 		((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
 			pa(a, b);
-		else if ((*b)->nu > mediannode(a)->nu)
+		else if (nodepos(a, tgtval(a, *b)) < stacksize(a) / 2)
 			ra(a);
 		else
 			rra(a);
 	}
-//	printloops(a, b);
 	while (stacksorted(a) && (*a)->nu > numin(a))
 		rra(a);
-//	printloops(a, b);
 }
 
 int	initpri(t_stack **a, t_stack **b)
