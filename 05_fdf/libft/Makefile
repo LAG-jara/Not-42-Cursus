@@ -6,7 +6,7 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/14 14:07:59 by cwan              #+#    #+#              #
-#    Updated: 2024/03/25 12:45:32 by cwan             ###   ########.fr        #
+#    Updated: 2024/03/28 09:58:55 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCS = \
 	ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c \
 	ft_strmapi.c ft_striteri.c \
 	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-	get_next_line.c
+	get_next_line.c ft_printf.c ft_printf2.c
 
 BSRCS = \
 	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \

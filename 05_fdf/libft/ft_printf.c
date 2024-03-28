@@ -6,20 +6,11 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 10:07:45 by cwan              #+#    #+#             */
-/*   Updated: 2023/09/26 16:41:50 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/28 09:59:46 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-static char	*ft_strchr(const char *s, int c)
-{
-	while (*s && (*s != (char)c))
-		s++;
-	if (*s == (char)c || !c)
-		return ((char *)s);
-	return (NULL);
-}
+#include "libft.h"
 
 int	ft_hexconv(unsigned long n, char *base)
 {
