@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/28 11:52:15 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/28 14:44:27 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	tgtval(t_stack **a, t_stack *b)
 			low = tmp->nu;
 		tmp = tmp->n;
 	}
-	tmp = tmp->n;
 	if (tmp->nu < low && b->nu < tmp->nu)
 		low = tmp->nu;
 	return (low);
@@ -48,18 +47,38 @@ int	nodepos(t_stack **a, int val)
 	return (i);
 }
 
-t_stack	cheapest(t_stack **a, t_stack *b)
+int	cheapest(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
+	int		cheapo;
+	int		lowest;
 	int		steps;
-	int		count;
+	int		i;
 
 	tmp = *b;
-	steps = 99999999;
-	while (tmp->n != *b)
+	cheapo = tmp->nu;
+	lowest = 99999;
+	i = 0;
+	while (i < stacksize(b))
 	{
-		count = nodepos(
+		steps = 0;
+		if (nodepos(a, tgtval(a, tmp)) <= (stacksize(a) / 2))
+			steps += nodepos(a, tgtval(a, tmp));
+		else
+			steps += (stacksize(a) - nodepos(a, tgtval(a, tmp)));
+		if (nodepos(b, tmp->nu) <= (stacksize(b) / 2))
+			steps += nodepos(b, tmp->nu);
+		else
+			steps += (stacksize(b) + 1 - nodepos(b, tmp->nu));
+		if (steps < lowest)
+		{
+			lowest = steps;
+			cheapo = tmp->nu;
+		}
+		tmp = tmp->n;
+		i++;
 	}
+	return (cheapo);
 }
 
 void	init3(t_stack **a)
@@ -100,16 +119,12 @@ void	init5(t_stack **a, t_stack **b)
 	while (stacksize(a) > 3)
 		pb(a, b);
 	init3(a);
-	ft_printf("Targetnode is %d\n", tgtval(a, *b));
-	ft_printf("Targetnodeb2a is %d\n", tgtval(b, *a));
-	ft_printf("Nodepos is %d\n", nodepos(a, tgtval(a, *b)));
-	printloops(a, b);
 	if (stacksortedrev(b))
 		sb(b);
 	while (*b)
 	{
-//	if (nodepos(a, tgtval(a, *b)) > 1 && nodepos(b, cheapest) > 1)
-//		rr(a, b);
+//	printloops(a, b);
+//	ft_printf("Target is %d, nodepos is %d, cheapest is %d\n", tgtval(a, *b), nodepos(a, tgtval(a, *b)), cheapest(a, b));
 		while (stepsreq(indexb2a(a, b), a) > 0)
 			ra(a);
 		while (stepsreq(indexb2a(a, b), a) < 0)
@@ -123,8 +138,10 @@ void	init5(t_stack **a, t_stack **b)
 		else
 			rra(a);
 	}
+//	printloops(a, b);
 	while (stacksorted(a) && (*a)->nu > numin(a))
 		rra(a);
+//	printloops(a, b);
 }
 
 int	initpri(t_stack **a, t_stack **b)
