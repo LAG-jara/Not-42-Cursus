@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/28 15:49:36 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/30 14:26:12 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,24 +83,6 @@ int	cheapest(t_stack **a, t_stack **b)
 
 void	init3(t_stack **a)
 {
-	if (!a || !*a)
-		return ;
-	if ((*a)->nu < (*a)->n->nu && (*a)->n->nu < (*a)->p->nu)
-		return ;
-	if ((*a)->nu < (*a)->n->nu && (*a)->nu < (*a)->p->nu)
-		(void)(sa(a),ra(a));
-	else if ((*a)->nu > (*a)->n->nu && (*a)->nu < (*a)->p->nu)
-		sa(a);
-	else if ((*a)->nu < (*a)->n->nu && (*a)->nu > (*a)->p->nu)
-		rra(a);
-	else if ((*a)->nu > (*a)->n->nu && (*a)->n->nu < (*a)->p->nu)
-		ra(a);
-	else if ((*a)->nu > (*a)->n->nu && (*a)->n->nu > (*a)->p->nu)
-		(void)(sa(a),rra(a));
-}
-/*	init3 shorter ver
-void	init3(t_stack **a)
-{
 	if (stacksize(a) < 3 && (*a)->nu > (*a)->n->nu)
 		sa(a);
 	else if (stacksize(a) == 3)
@@ -112,15 +94,16 @@ void	init3(t_stack **a)
 		if ((*a)->nu > (*a)->n->nu)
 			sa(a);
 	}
-}*/
+}
 
 void	init5(t_stack **a, t_stack **b)
 {
 	while (stacksize(a) > 3)
 		pb(a, b);
+	if (*b)
+		if (stacksize(b) == 2 && stacksortedrev(b))
+			sb(b);
 	init3(a);
-	if (stacksize(b) == 2 && stacksortedrev(b))
-		sb(b);
 	while (*b)
 	{
 		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
