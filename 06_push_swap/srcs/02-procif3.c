@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/31 12:55:45 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/31 13:34:38 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,11 @@ int	rrable(t_stack **a, t_stack **b)
 
 	alpha = nodepos(a, cheapest(b, a));
 	bravo = nodepos(b, cheapest(a, b));
-	if (alpha > 1 && (alpha < (stacksize(a) / 2)))
-		if (bravo > 1 && (bravo < (stacksize(b) / 2)))
+	if (alpha > 1 && (alpha < (stacksize(a) / 2)) && \
+	(bravo > 1 && (bravo < (stacksize(b) / 2))))
 			return (1);
-	if (alpha > 1 && (alpha > (stacksize(a) / 2)))
-		if (bravo > 1 && (bravo > (stacksize(b) / 2)))
+	if (alpha > 1 && (alpha > (stacksize(a) / 2)) && \
+	(bravo > 1 && (bravo > (stacksize(b) / 2))))
 			return (-1);
 	return (0);		
 }
@@ -145,10 +145,6 @@ void	initall(t_stack **a, t_stack **b)
 	init3(a);
 	while (*b)
 	{
-/*		if (rrable(a, b) > 0)
-			rr(a, b);
-		else if (rrable(a, b) < 0)
-			rrr(a, b);*/
 		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
 		((*b)->nu < numin(a) || (*b)->nu > numax(a))) || \
 		((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
