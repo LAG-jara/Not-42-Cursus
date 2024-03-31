@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/30 14:26:12 by cwan             ###   ########.fr       */
+/*   Updated: 2024/03/31 12:55:45 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,38 +47,57 @@ int	nodepos(t_stack **a, int val)
 	return (i);
 }
 
+int	countsteps(t_stack **a, t_stack **b, t_stack *tmp)
+{
+	int		steps;
+
+	steps = 0;
+	if (nodepos(a, tgtval(a, tmp)) <= (stacksize(a) / 2))
+		steps += nodepos(a, tgtval(a, tmp));
+	else
+		steps += (stacksize(a) - nodepos(a, tgtval(a, tmp)));
+	if (nodepos(b, tmp->nu) <= (stacksize(b) / 2))
+		steps += nodepos(b, tmp->nu);
+	else
+		steps += (stacksize(b) + 1 - nodepos(b, tmp->nu));
+	return (steps);
+}
+
 int	cheapest(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
 	int		cheapo;
 	int		lowest;
-	int		steps;
-	int		i;
 
 	tmp = *b;
 	cheapo = tmp->nu;
 	lowest = 99999;
-	i = 0;
-	while (i < stacksize(b))
+	while (tmp != *b || lowest == 99999)
 	{
-		steps = 0;
-		if (nodepos(a, tgtval(a, tmp)) <= (stacksize(a) / 2))
-			steps += nodepos(a, tgtval(a, tmp));
-		else
-			steps += (stacksize(a) - nodepos(a, tgtval(a, tmp)));
-		if (nodepos(b, tmp->nu) <= (stacksize(b) / 2))
-			steps += nodepos(b, tmp->nu);
-		else
-			steps += (stacksize(b) + 1 - nodepos(b, tmp->nu));
-		if (steps < lowest)
+		if (countsteps(a, b, tmp) < lowest)
 		{
-			lowest = steps;
+			lowest = countsteps(a, b, tmp);
 			cheapo = tmp->nu;
 		}
 		tmp = tmp->n;
-		i++;
 	}
 	return (cheapo);
+}
+
+int	rrable(t_stack **a, t_stack **b)
+{
+	int	alpha;
+	int bravo;
+
+	alpha = nodepos(a, cheapest(b, a));
+	bravo = nodepos(b, cheapest(a, b));
+	if (alpha > 1 && (alpha < (stacksize(a) / 2)))
+		if (bravo > 1 && (bravo < (stacksize(b) / 2)))
+			return (1);
+	if (alpha > 1 && (alpha > (stacksize(a) / 2)))
+		if (bravo > 1 && (bravo > (stacksize(b) / 2)))
+			return (-1);
+	return (0);		
 }
 
 void	init3(t_stack **a)
@@ -124,8 +143,25 @@ void	initall(t_stack **a, t_stack **b)
 	while (stacksize(a) > 3)
 		pb(a, b);
 	init3(a);
-	init5(a, b);
-//	ft_printf("Target is %d, nodepos is %d, cheapest is %d\n", tgtval(a, *b), nodepos(a, tgtval(a, *b)), cheapest(a, b));
+	while (*b)
+	{
+/*		if (rrable(a, b) > 0)
+			rr(a, b);
+		else if (rrable(a, b) < 0)
+			rrr(a, b);*/
+		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
+		((*b)->nu < numin(a) || (*b)->nu > numax(a))) || \
+		((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
+			pa(a, b);
+//		else if ((*a)->nu == cheapest(a, b) && (*b)->nu == cheapest(b, a))
+//			pa(a, b);
+		else if (nodepos(a, tgtval(a, *b)) < stacksize(a) / 2)
+			ra(a);
+		else
+			rra(a);
+	}
+	while (stacksorted(a) && (*a)->nu > numin(a))
+		rra(a);
 }
 
 int	initpri(t_stack **a, t_stack **b)
