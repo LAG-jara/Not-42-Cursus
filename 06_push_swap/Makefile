@@ -13,7 +13,7 @@
 NAME = push_swap
 
 SRCS = 	srcs/ops_push.c srcs/ops_swap.c srcs/ops_rotate.c srcs/ops_rrotate.c \
-		srcs/stackfns.c srcs/stackutils.c srcs/stackutils2.c srcs/utils.c \
+		srcs/stk_fns.c srcs/stk_utils.c srcs/stk_utils2.c srcs/utils.c \
 		srcs/01-Inputvalidatn.c srcs/02-procif3.c \
 		push_swap.c
 
