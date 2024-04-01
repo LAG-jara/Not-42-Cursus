@@ -44,21 +44,6 @@ int	numin(t_stack **a)
 	return (i);
 }
 
-int	stacksize(t_stack **a)
-{
-	t_stack	*ptr;
-	int		count;
-
-	ptr = *a;
-	count = 1;
-	while (ptr->n != *a)
-	{
-		ptr = ptr->n;
-		count++;
-	}
-	return (count);
-}
-
 int	stacksorted(t_stack	**a)
 {
 	t_stack	*tmp;

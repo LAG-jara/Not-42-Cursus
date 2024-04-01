@@ -12,21 +12,6 @@
 
 #include "push_swap.h"
 
-t_stack	*mediannode(t_stack **a)
-{
-	t_stack	*tmp;
-	int		i;
-
-	tmp = *a;
-	i = 0;
-	while (i < (stacksize(a) / 2))
-	{
-		tmp = tmp->n;
-		i++;
-	}
-	return (tmp);
-}
-
 t_stack	*ft_stklast(t_stack *lst)
 {
 	t_stack	*last;
