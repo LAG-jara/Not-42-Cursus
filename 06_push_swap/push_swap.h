@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/28 11:17:17 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/02 11:25:52 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,19 @@ void	ft_stkadd_back(t_stack **lst, t_stack *node);
 void	ft_freestack(t_stack **lst);
 
 //stk_fns_calc.c
-int		tgtval(t_stack **a, t_stack *b);
 int		countsteps(t_stack **a, t_stack **b, t_stack *tmp);
-int		cheapest(t_stack **a, t_stack **b);
+t_stack	*cheapest(t_stack **a, t_stack **b);
 
 //stk_fns_pos.c
 int		stacksize(t_stack **a);
-int		nodepos(t_stack **a, int val);
+int		nodepos(t_stack **a, t_stack *node);
 t_stack	*mediannode(t_stack **a);
 
 //stk_utils.c
-int		numax(t_stack **a);
-int		numin(t_stack **a);
+t_stack	*nodemax(t_stack **a);
+t_stack	*nodemin(t_stack **a);
+t_stack	*tgta(t_stack **a, t_stack *b);
+t_stack	*tgtb(t_stack **b, t_stack *a);
 int		stacksorted(t_stack **a);
 int		stacksortedrev(t_stack **a);
 
@@ -73,6 +74,7 @@ void	ft_free(char **arr);
 //01_inputvalidatn.c
 int		procargv(char **av, t_stack **stacka);
 
+//02_initsort.c
 int		initpri(t_stack **a, t_stack **b);
 
 //temp
