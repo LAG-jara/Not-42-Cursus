@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02-procif3.c                                       :+:      :+:    :+:   */
+/*   02-Initsort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/31 13:34:38 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/02 13:05:34 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,18 @@
 int	rrable(t_stack **a, t_stack **b)
 {
 	int	alpha;
-	int bravo;
+	int	bravo;
 
-	alpha = nodepos(a, cheapest(b, a));
-	bravo = nodepos(b, cheapest(a, b));
-	if (alpha > 1 && (alpha < (stacksize(a) / 2)) && \
-	(bravo > 1 && (bravo < (stacksize(b) / 2))))
-			return (1);
-	if (alpha > 1 && (alpha > (stacksize(a) / 2)) && \
-	(bravo > 1 && (bravo > (stacksize(b) / 2))))
-			return (-1);
-	return (0);		
+	alpha = tgta(a, cheapest(a, b))->nu;
+	bravo = cheapest(a, b)->nu;
+
+	if ((alpha != (*a)->nu && alpha < mediannode(a)->nu) && \
+	(bravo != (*b)->nu && bravo > mediannode(b)->nu))
+		return(rr(a, b), 1);
+	if ((alpha != (*a)->nu && alpha > mediannode(a)->nu) && \
+	(bravo != (*b)->nu && bravo < mediannode(b)->nu))
+		return(rrr(a, b), -1);
+	return (0);
 }
 
 void	init3(t_stack **a)
@@ -34,9 +35,9 @@ void	init3(t_stack **a)
 		sa(a);
 	else if (stacksize(a) == 3)
 	{
-		if ((*a)->nu == numax(a))
+		if ((*a)->nu == nodemax(a)->nu)
 			ra(a);
-		else if ((*a)->n->nu == numax(a))
+		else if ((*a)->n->nu == nodemax(a)->nu)
 			rra(a);
 		if ((*a)->nu > (*a)->n->nu)
 			sa(a);
@@ -54,15 +55,15 @@ void	init5(t_stack **a, t_stack **b)
 	while (*b)
 	{
 		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
-		((*b)->nu < numin(a) || (*b)->nu > numax(a))) || \
+		((*b)->nu < nodemin(a)->nu || (*b)->nu > nodemax(a)->nu)) || \
 		((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
 			pa(a, b);
-		else if (nodepos(a, tgtval(a, *b)) < stacksize(a) / 2)
+		else if (nodepos(a, tgta(a, *b)) < stacksize(a) / 2)
 			ra(a);
 		else
 			rra(a);
 	}
-	while (stacksorted(a) && (*a)->nu > numin(a))
+	while (stacksorted(a) && (*a)->nu > nodemin(a)->nu)
 		rra(a);
 }
 
@@ -74,17 +75,15 @@ void	initall(t_stack **a, t_stack **b)
 	while (*b)
 	{
 		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
-		((*b)->nu < numin(a) || (*b)->nu > numax(a))) || \
+		((*b)->nu < nodemin(a)->nu || (*b)->nu > nodemax(a)->nu)) || \
 		((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
 			pa(a, b);
-//		else if ((*a)->nu == cheapest(a, b) && (*b)->nu == cheapest(b, a))
-//			pa(a, b);
-		else if (nodepos(a, tgtval(a, *b)) < stacksize(a) / 2)
+		else if (nodepos(a, tgta(a, *b)) < stacksize(a) / 2)
 			ra(a);
 		else
 			rra(a);
 	}
-	while (stacksorted(a) && (*a)->nu > numin(a))
+	while (stacksorted(a) && (*a)->nu > nodemin(a)->nu)
 		rra(a);
 }
 

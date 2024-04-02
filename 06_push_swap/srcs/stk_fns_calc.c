@@ -1,58 +1,47 @@
-//include stdheader
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stk_fns_calc.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/02 09:19:59 by cwan              #+#    #+#             */
+/*   Updated: 2024/04/02 11:23:50 by cwan             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	tgtval(t_stack **a, t_stack *b)
-{
-	t_stack	*tmp;
-	int		low;
-
-	low = numax(a);
-	tmp = *a;
-	if ((b->nu > numax(a) || b->nu < numin(a)))
-		return (numin(a));
-	while (tmp->n != *a)
-	{
-		if (tmp->nu < low && b->nu < tmp->nu)
-			low = tmp->nu;
-		tmp = tmp->n;
-	}
-	if (tmp->nu < low && b->nu < tmp->nu)
-		low = tmp->nu;
-	return (low);
-}
 
 int	countsteps(t_stack **a, t_stack **b, t_stack *tmp)
 {
 	int		steps;
-
 	steps = 0;
-	if (nodepos(a, tgtval(a, tmp)) <= (stacksize(a) / 2))
-		steps += nodepos(a, tgtval(a, tmp));
+	if (nodepos(a, tgta(a, tmp)) <= (stacksize(a) / 2))
+		steps += nodepos(a, tgta(a, tmp));
 	else
-		steps += (stacksize(a) - nodepos(a, tgtval(a, tmp)));
-	if (nodepos(b, tmp->nu) <= (stacksize(b) / 2))
-		steps += nodepos(b, tmp->nu);
+		steps += (stacksize(a) - nodepos(a, tgta(a, tmp)));
+	if (nodepos(b, tmp) <= (stacksize(b) / 2))
+		steps += nodepos(b, tmp);
 	else
-		steps += (stacksize(b) + 1 - nodepos(b, tmp->nu));
+		steps += (stacksize(b) + 1 - nodepos(b, tmp));
 	return (steps);
 }
 
-int	cheapest(t_stack **a, t_stack **b)
+t_stack	*cheapest(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
-	int		cheapo;
+	t_stack	*cheapo;
 	int		lowest;
 
 	tmp = *b;
-	cheapo = tmp->nu;
+	cheapo = tmp;
 	lowest = 99999;
 	while (tmp != *b || lowest == 99999)
 	{
 		if (countsteps(a, b, tmp) < lowest)
 		{
 			lowest = countsteps(a, b, tmp);
-			cheapo = tmp->nu;
+			cheapo = tmp;
 		}
 		tmp = tmp->n;
 	}

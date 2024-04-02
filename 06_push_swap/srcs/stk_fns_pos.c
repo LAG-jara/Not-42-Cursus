@@ -1,4 +1,14 @@
-//incl stdheader
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stk_fns_pos.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/02 09:23:30 by cwan              #+#    #+#             */
+/*   Updated: 2024/04/02 11:19:17 by cwan             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -17,14 +27,15 @@ int	stacksize(t_stack **a)
 	return (count);
 }
 
-int	nodepos(t_stack **a, int val)
+int	nodepos(t_stack **a, t_stack *node)
 {
 	t_stack	*tmp;
 	int		i;
 
 	tmp = *a;
+//	LEAVE FOR NORME ERROR, to change to 0 maybe. Now 1 for ez count ref
 	i = 1;
-	while (tmp->nu != val)
+	while (tmp->nu != node->nu)
 	{
 		tmp = tmp->n;
 		i++;

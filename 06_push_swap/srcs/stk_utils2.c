@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stackutils2.c                                      :+:      :+:    :+:   */
+/*   stk_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan42 <cwan42@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 06:42:52 by cwan42            #+#    #+#             */
-/*   Updated: 2024/03/25 11:33:56 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/02 10:45:26 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	indexb2a(t_stack **a, t_stack **b)
 
 	tmp = *a;
 	i = 0;
-	if ((*b)->nu > numax(a) || (*b)->nu < numin(a))
+	if ((*b)->nu > nodemax(a)->nu || (*b)->nu < nodemin(a)->nu)
 		return (0);
 	while ((*b)->nu > tmp->nu)
 	{
@@ -45,7 +45,7 @@ int	indexa2b(t_stack **a, t_stack **b)
 
 	tmp = *b;
 	i = 0;
-	if ((*a)->nu > numax(b) || (*a)->nu < numin(b))
+	if ((*a)->nu > nodemax(b)->nu || (*a)->nu < nodemin(b)->nu)
 		return (0);
 	while ((*a)->nu < tmp->nu)
 	{
