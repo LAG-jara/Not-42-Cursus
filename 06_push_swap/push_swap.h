@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/02 11:25:52 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/02 13:28:00 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ int		stacksortedrev(t_stack **a);
 int		indexb2a(t_stack **a, t_stack **b);
 int		indexa2b(t_stack **a, t_stack **b);
 int		stepsreq(int pos, t_stack **a);
+
+//a2b.c
+void	a2b(t_stack **a, t_stack **b);
 
 //ops_push, swap, rotate, rrotate
 void	pa(t_stack **heada, t_stack **headb);
