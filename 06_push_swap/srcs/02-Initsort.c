@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/02 13:05:34 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/02 15:40:04 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ void	init5(t_stack **a, t_stack **b)
 
 void	initall(t_stack **a, t_stack **b)
 {
+	if (stacksize(a) > 4)
+		(void)(pb(a, b), pb(a, b));
 	while (stacksize(a) > 3)
+//		a2b(a, b);
 		pb(a, b);
 	init3(a);
 	while (*b)
