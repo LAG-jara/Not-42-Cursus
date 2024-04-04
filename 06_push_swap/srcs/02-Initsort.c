@@ -6,27 +6,28 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/04 10:22:44 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/04/04 14:02:37 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	rrable(t_stack **a, t_stack **b)
+void	rrable(t_stack **a, t_stack **b)
 {
-	int	alpha;
-	int	bravo;
+	t_stack	*topush;
+	t_stack	*tgt;
 
-	alpha = tgta(a, cheapest(a, b))->nu;
-	bravo = cheapest(a, b)->nu;
-
-	if ((alpha != (*a)->nu && alpha < mediannode(a)->nu) && \
-	(bravo != (*b)->nu && bravo > mediannode(b)->nu))
-		return(rr(a, b), 1);
-	if ((alpha != (*a)->nu && alpha > mediannode(a)->nu) && \
-	(bravo != (*b)->nu && bravo < mediannode(b)->nu))
-		return(rrr(a, b), -1);
-	return (0);
+	topush = cheapest(a, b);
+	tgt = tgta(a, cheapest(a, b));
+	if (topush != *a && tgt != *b)
+	{
+		while ((nodepos(b, topush) <= (stacksize(b) / 2)) && \
+		nodepos(a, tgt) <= (stacksize(a) / 2))
+			rr(a, b);
+		while ((nodepos(b, topush) > (stacksize(b) / 2)) && \
+		nodepos(b, tgt) > (stacksize(b) / 2))
+			rrr(a, b);
+	}
 }
 
 void	init3(t_stack **a)
@@ -78,6 +79,8 @@ void	initall(t_stack **a, t_stack **b)
 	init3(a);
 	while (*b)
 	{
+//		if (cheapest(a, b) != *b && tgta(a, cheapest(a, b)) != *a)
+//			rrable(a, b);
 		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
 		((*b)->nu < nodemin(a)->nu || (*b)->nu > nodemax(a)->nu)) || \
 		((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
