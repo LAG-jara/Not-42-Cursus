@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/04 14:02:37 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/04/05 15:39:10 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	rrable(t_stack **a, t_stack **b)
 
 	topush = cheapest(a, b);
 	tgt = tgta(a, cheapest(a, b));
-	if (topush != *a && tgt != *b)
+	if (topush != *b && tgt != *a)
 	{
 		while ((nodepos(b, topush) <= (stacksize(b) / 2)) && \
 		nodepos(a, tgt) <= (stacksize(a) / 2))
@@ -90,8 +90,13 @@ void	initall(t_stack **a, t_stack **b)
 		else
 			rra(a);
 	}
-	while (stacksorted(a) && (*a)->nu > nodemin(a)->nu)
-		rra(a);
+	while (stacksorted(a))
+	{
+		if (stacksorted(a) && (nodepos(a, nodemin(a)) < (stacksize(a) / 2)))
+			ra(a);
+		else
+			rra(a);
+	}
 }
 
 int	initpri(t_stack **a, t_stack **b)
