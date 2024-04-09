@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/02 13:28:00 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/10 01:57:35 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	ft_freestack(t_stack **lst);
 
 //stk_fns_calc.c
 int		countsteps(t_stack **a, t_stack **b, t_stack *tmp);
+int		countstepsb2a(t_stack **a, t_stack **b, t_stack *tmp);
 t_stack	*cheapest(t_stack **a, t_stack **b);
+t_stack	*cheapestb2a(t_stack **a, t_stack **b);
 
 //stk_fns_pos.c
 int		stacksize(t_stack **a);
@@ -49,12 +51,13 @@ t_stack	*tgtb(t_stack **b, t_stack *a);
 int		stacksorted(t_stack **a);
 int		stacksortedrev(t_stack **a);
 
-int		indexb2a(t_stack **a, t_stack **b);
-int		indexa2b(t_stack **a, t_stack **b);
-int		stepsreq(int pos, t_stack **a);
+//int		indexb2a(t_stack **a, t_stack **b);
+//int		indexa2b(t_stack **a, t_stack **b);
+//int		stepsreq(int pos, t_stack **a);
 
 //a2b.c
 void	a2b(t_stack **a, t_stack **b);
+void	b2a(t_stack **a, t_stack **b);
 
 //ops_push, swap, rotate, rrotate
 void	pa(t_stack **heada, t_stack **headb);

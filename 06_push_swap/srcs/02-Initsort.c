@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/05 15:39:10 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/04/10 02:07:30 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	init5(t_stack **a, t_stack **b)
 			sb(b);
 	init3(a);
 	while (*b)
-	{
+		b2a(a, b);
+/*	{
 		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
 		((*b)->nu < nodemin(a)->nu || (*b)->nu > nodemax(a)->nu)) || \
 		((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
@@ -63,9 +64,15 @@ void	init5(t_stack **a, t_stack **b)
 			ra(a);
 		else
 			rra(a);
+	}*/
+//	while (stacksorted(a) && (*a)->nu > nodemin(a)->nu)
+	while (stacksorted(a))
+	{
+		if (stacksorted(a) && (nodepos(a, nodemin(a)) <= (stacksize(a) / 2)))
+			ra(a);
+		else
+			rra(a);
 	}
-	while (stacksorted(a) && (*a)->nu > nodemin(a)->nu)
-		rra(a);
 }
 
 void	initall(t_stack **a, t_stack **b)
@@ -78,7 +85,8 @@ void	initall(t_stack **a, t_stack **b)
 		pb(a, b);
 	init3(a);
 	while (*b)
-	{
+		b2a(a, b);
+/*
 //		if (cheapest(a, b) != *b && tgta(a, cheapest(a, b)) != *a)
 //			rrable(a, b);
 		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
@@ -89,10 +97,10 @@ void	initall(t_stack **a, t_stack **b)
 			ra(a);
 		else
 			rra(a);
-	}
+	}*/
 	while (stacksorted(a))
 	{
-		if (stacksorted(a) && (nodepos(a, nodemin(a)) < (stacksize(a) / 2)))
+		if (stacksorted(a) && (nodepos(a, nodemin(a)) <= (stacksize(a) / 2)))
 			ra(a);
 		else
 			rra(a);
