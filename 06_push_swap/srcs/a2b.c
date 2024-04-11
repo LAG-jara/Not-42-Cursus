@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 13:24:18 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/10 02:06:37 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/04/12 01:34:04 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	a2b(t_stack **a, t_stack **b)
 	tgt = tgtb(b, cheapest(b, a));
 	if (topush != *a && tgt != *b)
 	{
-		while ((nodepos(a, topush) <= (stacksize(a) / 2)) && \
-		 nodepos(b, tgt) <= (stacksize(b) / 2))
+		while ((nodepos(a, topush) < (stacksize(a) / 2)) && \
+		 nodepos(b, tgt) < (stacksize(b) / 2))
 			rr(a, b);
-		while ((nodepos(a, topush) > (stacksize(a) / 2)) && \
-		nodepos(b, tgt) > (stacksize(b) / 2))
+		while ((nodepos(a, topush) >= (stacksize(a) / 2)) && \
+		nodepos(b, tgt) >= (stacksize(b) / 2))
 			rrr(a, b);
 	}
 	while (topush != *a)
 	{
-		if (nodepos(a, topush) <= (stacksize(a) / 2))
+		if (nodepos(a, topush) < (stacksize(a) / 2))
 			ra(a);
 		else
 			rra(a);
@@ -39,9 +39,9 @@ void	a2b(t_stack **a, t_stack **b)
 	{
 		if (tgt == *b)
 			pb(a, b);
-		else if (nodepos(b, tgt) <= (stacksize(b) / 2))
+		else if (nodepos(b, tgt) < (stacksize(b) / 2))
 			rb(b);
-		else if (nodepos(b, tgt) > (stacksize(b) / 2))
+		else if (nodepos(b, tgt) >= (stacksize(b) / 2))
 			rrb(b);
 	}
 }
@@ -55,16 +55,16 @@ void	b2a(t_stack **a, t_stack **b)
 	tgt = tgta(a, cheapest(a, b));
 	if (topush != *b && tgt != *a)
 	{
-		while ((nodepos(b, topush) <= (stacksize(b) / 2)) && \
-		nodepos(a, tgt) > (stacksize(a) / 2))
+		while ((nodepos(b, topush) < (stacksize(b) / 2)) && \
+		nodepos(a, tgt) < (stacksize(a) / 2))
 			rr(a, b);
-		while ((nodepos(b, topush) > (stacksize(b) / 2)) && \
-		nodepos(a, tgt) > (stacksize(a) / 2))
+		while ((nodepos(b, topush) >= (stacksize(b) / 2)) && \
+		nodepos(a, tgt) >= (stacksize(a) / 2))
 			rrr(a, b);
 	}
 	while (topush != *b)
 	{
-		if (nodepos(b, topush) <= (stacksize(a) / 2))
+		if (nodepos(b, topush) < (stacksize(b) / 2))
 			rb(b);
 		else
 			rrb(b);
@@ -73,9 +73,9 @@ void	b2a(t_stack **a, t_stack **b)
 	{
 		if (tgt == *a)
 			pa(a, b);
-		else if (nodepos(a, tgt) <= (stacksize(a) / 2))
+		else if (nodepos(a, tgt) < (stacksize(a) / 2))
 			ra(a);
-		else if (nodepos(a, tgt) > (stacksize(a) / 2))
+		else if (nodepos(a, tgt) >= (stacksize(a) / 2))
 			rra(a);
 	}
 }

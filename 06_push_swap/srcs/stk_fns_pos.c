@@ -6,11 +6,22 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 09:23:30 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/02 11:19:17 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/10 02:17:22 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	mintotop(t_stack **a)
+{
+	while (stacksorted(a))
+	{
+		if (stacksorted(a) && (nodepos(a, nodemin(a)) <= stacksize(a) / 2))
+			ra(a);
+		else
+			rra(a);
+	}
+}
 
 int	stacksize(t_stack **a)
 {

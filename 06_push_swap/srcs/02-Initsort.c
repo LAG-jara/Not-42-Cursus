@@ -6,29 +6,11 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/10 02:07:30 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/04/12 01:37:23 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	rrable(t_stack **a, t_stack **b)
-{
-	t_stack	*topush;
-	t_stack	*tgt;
-
-	topush = cheapest(a, b);
-	tgt = tgta(a, cheapest(a, b));
-	if (topush != *b && tgt != *a)
-	{
-		while ((nodepos(b, topush) <= (stacksize(b) / 2)) && \
-		nodepos(a, tgt) <= (stacksize(a) / 2))
-			rr(a, b);
-		while ((nodepos(b, topush) > (stacksize(b) / 2)) && \
-		nodepos(b, tgt) > (stacksize(b) / 2))
-			rrr(a, b);
-	}
-}
 
 void	init3(t_stack **a)
 {
@@ -54,8 +36,7 @@ void	init5(t_stack **a, t_stack **b)
 			sb(b);
 	init3(a);
 	while (*b)
-		b2a(a, b);
-/*	{
+	{
 		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
 		((*b)->nu < nodemin(a)->nu || (*b)->nu > nodemax(a)->nu)) || \
 		((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
@@ -64,47 +45,20 @@ void	init5(t_stack **a, t_stack **b)
 			ra(a);
 		else
 			rra(a);
-	}*/
-//	while (stacksorted(a) && (*a)->nu > nodemin(a)->nu)
-	while (stacksorted(a))
-	{
-		if (stacksorted(a) && (nodepos(a, nodemin(a)) <= (stacksize(a) / 2)))
-			ra(a);
-		else
-			rra(a);
 	}
+	mintotop(a);
 }
 
 void	initall(t_stack **a, t_stack **b)
 {
 	if (stacksize(a) > 4)
 		(void)(pb(a, b), pb(a, b));
-	while (stacksize(a) > 3 && (stacksize(a) > stacksize(b)))
-		a2b(a, b);
 	while (stacksize(a) > 3)
 		pb(a, b);
 	init3(a);
 	while (*b)
 		b2a(a, b);
-/*
-//		if (cheapest(a, b) != *b && tgta(a, cheapest(a, b)) != *a)
-//			rrable(a, b);
-		if (!stepsreq(indexb2a(a, b), a) && ((!stacksorted(a) && \
-		((*b)->nu < nodemin(a)->nu || (*b)->nu > nodemax(a)->nu)) || \
-		((*b)->nu < (*a)->nu && (*b)->nu > (*a)->p->nu)))
-			pa(a, b);
-		else if (nodepos(a, tgta(a, *b)) < stacksize(a) / 2)
-			ra(a);
-		else
-			rra(a);
-	}*/
-	while (stacksorted(a))
-	{
-		if (stacksorted(a) && (nodepos(a, nodemin(a)) <= (stacksize(a) / 2)))
-			ra(a);
-		else
-			rra(a);
-	}
+	mintotop(a);
 }
 
 int	initpri(t_stack **a, t_stack **b)

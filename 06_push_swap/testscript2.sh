@@ -7,7 +7,7 @@ for i in 1 2 3 4 5; do
 done
 
 for i in 1 2 3 4 5; do
-	ARG=$(shuf -i 1-500 -n 500 | tr '\n' ' ')
+	ARG=$(shuf -i 1-1000 -n 500 | tr '\n' ' ')
 	echo -n "$i: For 500 numbers: "
 	./push_swap $ARG | wc -l | tr -d '\n'
 	echo -n " : "
