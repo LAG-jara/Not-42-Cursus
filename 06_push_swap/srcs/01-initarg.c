@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   01-Inputvalidatn.c                                 :+:      :+:    :+:   */
+/*   01-initarg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/20 21:40:59 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/13 15:43:11 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static int	checkvalid(char **arr)
 		j = 1;
 		if ((!(arr[i][0] >= '0' && arr[i][0] <= '9') && arr[i][0] != '-') ||
 		(arr[i][0] == '-' && !arr[i][1]) ||
+		(arr[i][0] == '0' && arr[i][1] == '0') ||
 		(arr[i][0] == '-' && !(arr[i][1] >= '0' && arr[i][1] <= '9')))
 			return (1);
 		while (arr[i][j])
@@ -70,7 +71,7 @@ static int	checkdup(char **arr)
 	return (0);
 }
 
-int	procargv(char **av, t_stack **stacka)
+int	initarg(char **av, t_stack **stacka)
 {
 	char	*wspace;
 	char	*str;

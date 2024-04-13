@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/10 09:50:50 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/04/13 15:46:43 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,9 @@ long	ft_atol(const char *str);
 int		ft_strcmp(const char *s1, const char *s2);
 void	ft_free(char **arr);
 
-//01_inputvalidatn.c
-int		procargv(char **av, t_stack **stacka);
-
-//02_initsort.c
-int		initpri(t_stack **a, t_stack **b);
+//01_initarg, 02_initsort
+int		initarg(char **av, t_stack **stacka);
+int		initsort(t_stack **a, t_stack **b);
 
 //temp
 void	printloops(t_stack **lista, t_stack **listb);

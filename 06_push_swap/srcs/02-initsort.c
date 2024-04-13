@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02-Initsort.c                                      :+:      :+:    :+:   */
+/*   02-initsort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/12 01:37:23 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/04/13 15:49:47 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void	initall(t_stack **a, t_stack **b)
 	mintotop(a);
 }
 
-int	initpri(t_stack **a, t_stack **b)
+int	initsort(t_stack **a, t_stack **b)
 {
 	if (!a || !*a || !b || !stacksorted(a))
 		return (1);
-	if (stacksize(a) < 6)
-		init5(a, b);
-	else
-		initall(a, b);
+//	if (stacksize(a) < 6)
+//		init5(a, b);
+//	else
+	initall(a, b);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/28 13:49:50 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/13 15:46:34 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ int	main(int ac, char *av[])
 	*stacka = NULL;
 	if (ac > 1)
 	{
-		if (procargv(av, stacka))
+		if (initarg(av, stacka))
 			return (ft_putstr_fd("Error\n", 2), free(stacka), 1);
 	}
 	else
 		return (free(stacka), 0);
 	stackb = malloc(sizeof(t_stack *));
 	*stackb = NULL;
-	initpri(stacka, stackb);
+	initsort(stacka, stackb);
 //	if (stacka && stackb)
 //		printloops(stacka, stackb);
 	if (!*stacka)
