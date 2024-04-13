@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 11:43:01 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/13 18:03:13 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/13 23:09:34 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,29 @@
 
 int	countsteps(t_stack **a, t_stack **b, t_stack *tmp)
 {
-	int		i;
-	int		j;
 	int		alpha;
 	int		bravo;
 
 	alpha = nodepos(a, tgta(a, tmp));
 	bravo = nodepos(b, tmp);
-	i = 0;
-	j = 0;
-	if (alpha < (stacksize(a) / 2))
-		i += alpha;
+	if ((alpha < (stacksize(a) / 2)) && (bravo < (stacksize(b) / 2)))
+	{
+		if (alpha > bravo)
+			return (alpha);
+		else
+			return (bravo);
+	}
+	else if ((alpha >= (stacksize(a) / 2)) && (bravo >= (stacksize(b) / 2)))
+	{
+		if ((stacksize(a) - alpha) > (stacksize(b) - bravo))
+			return (stacksize(a) - alpha);
+		else
+			return (stacksize(b) - bravo);
+	}
+	else if ((alpha < (stacksize(a) / 2)) && (bravo >= (stacksize(b) / 2)))
+		return (alpha + (stacksize(b) - bravo));
 	else
-		j += (stacksize(a) - alpha);
-	if (bravo < (stacksize(b) / 2))
-		i += bravo;
-	else
-		j += (stacksize(b) + 1 - bravo);
-	return (i + j);
+		return ((stacksize(a) - alpha) + bravo);
 }
 
 t_stack	*cheapest(t_stack **a, t_stack **b)
