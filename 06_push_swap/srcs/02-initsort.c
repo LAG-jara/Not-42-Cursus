@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 18:23:31 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/13 17:57:11 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/13 23:27:04 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,10 @@ int	initsort(t_stack **a, t_stack **b)
 {
 	if (!a || !*a || !b || !stacksorted(a))
 		return (1);
-	if (stacksize(a) == 5)
+	if (stacksize(a) <= 5)
 		init5(a, b);
 	else
 	{
-		(void)(pb(a, b), pb(a, b));
 		while (stacksize(a) > 3)
 			pb(a, b);
 		init3(a);
