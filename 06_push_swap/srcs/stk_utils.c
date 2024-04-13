@@ -5,105 +5,101 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 06:47:38 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/02 11:26:11 by cwan             ###   ########.fr       */
+/*   Created: 2024/03/13 11:43:01 by cwan              #+#    #+#             */
+/*   Updated: 2024/04/13 18:03:13 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*nodemax(t_stack **a)
+int	countsteps(t_stack **a, t_stack **b, t_stack *tmp)
 {
-	t_stack	*tmp;
-	t_stack	*max;
+	int		i;
+	int		j;
+	int		alpha;
+	int		bravo;
 
-	tmp = *a;
-	max = (*a)->p;
-	while (tmp->n != *a)
-	{
-		if (tmp->nu > max->nu)
-			max = tmp;
-		tmp = tmp->n;
-	}
-	return (max);
+	alpha = nodepos(a, tgta(a, tmp));
+	bravo = nodepos(b, tmp);
+	i = 0;
+	j = 0;
+	if (alpha < (stacksize(a) / 2))
+		i += alpha;
+	else
+		j += (stacksize(a) - alpha);
+	if (bravo < (stacksize(b) / 2))
+		i += bravo;
+	else
+		j += (stacksize(b) + 1 - bravo);
+	return (i + j);
 }
 
-t_stack	*nodemin(t_stack **a)
+t_stack	*cheapest(t_stack **a, t_stack **b)
 {
 	t_stack	*tmp;
-	t_stack	*min;
-
-	tmp = *a;
-	min = (*a)->p;
-	while (tmp->n != *a)
-	{
-		if (tmp->nu < min->nu)
-			min = tmp;
-		tmp = tmp->n;
-	}
-	return (min);
-}
-
-t_stack	*tgta(t_stack **a, t_stack *b)
-{
-	t_stack	*tmp;
-	t_stack	*tgt;
-
-	tmp = *a;
-	tgt = (*a)->p;
-	if (b->nu > nodemax(a)->nu || b->nu < nodemin(a)->nu)
-		return (nodemin(a));
-	while (tmp->n != *a)
-	{
-		if (b->nu < tmp->nu && b->nu > tmp->p->nu)
-			tgt = tmp;
-		tmp = tmp->n;
-	}
-	return (tgt);
-}
-
-t_stack	*tgtb(t_stack **b, t_stack *a)
-{
-	t_stack	*tmp;
-	t_stack	*tgt;
+	t_stack	*cheapo;
+	int		lowest;
 
 	tmp = *b;
-	tgt = (*b)->p;
-	if (a->nu < nodemin(b)->nu || a->nu > nodemax(b)->nu)
-		return (nodemax(b));
-	while (tmp->n != *b)
+	cheapo = tmp;
+	lowest = 99999;
+	while (tmp != *b || lowest == 99999)
 	{
-		if (a->nu > tmp->nu && a->nu < tmp->p->nu)
-			tgt = tmp;
+		if (countsteps(a, b, tmp) < lowest)
+		{
+			lowest = countsteps(a, b, tmp);
+			cheapo = tmp;
+		}
 		tmp = tmp->n;
 	}
-	return (tgt);
+	return (cheapo);
 }
 
-int	stacksorted(t_stack	**a)
+long	ft_atol(const char *str)
 {
-	t_stack	*tmp;
+	long	i;
+	long	sign;
+	long	result;
 
-	tmp = *a;
-	while (tmp->n != *a)
+	i = 0;
+	sign = 1;
+	result = 0;
+	while ((str[i] >= '\t' && str[i] <= '\r') || (str[i] == ' '))
+		i++;
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] && str[i] <= '9' && str[i] >= '0')
 	{
-		if (tmp->nu > tmp->n->nu)
-			return (1);
-		tmp = tmp->n;
+		result = (result * 10) + (str[i] - '0');
+		i++;
 	}
+	return (sign * result);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (1);
+		i++;
+	}
+	if (s1[i] || s2[i])
+		return (1);
 	return (0);
 }
 
-int	stacksortedrev(t_stack **a)
+void	ft_free(char **arr)
 {
-	t_stack	*tmp;
+	int	i;
 
-	tmp = *a;
-	while (tmp->n != *a)
-	{
-		if (tmp->nu < tmp->n->nu)
-			return (1);
-		tmp = tmp->n;
-	}
-	return (0);
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
 }

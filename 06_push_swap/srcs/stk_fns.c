@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stackfns.c                                         :+:      :+:    :+:   */
+/*   stk_fns.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:05:49 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/24 15:45:05 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/13 16:10:46 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	stacksize(t_stack **a)
+{
+	t_stack	*ptr;
+	int		count;
+
+	ptr = *a;
+	count = 1;
+	while (ptr->n != *a)
+	{
+		ptr = ptr->n;
+		count++;
+	}
+	return (count);
+}
 
 t_stack	*ft_stklast(t_stack *lst)
 {
