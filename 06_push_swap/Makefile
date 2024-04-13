@@ -6,17 +6,15 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 16:42:25 by cwan              #+#    #+#              #
-#    Updated: 2024/04/13 15:45:24 by cwan             ###   ########.fr        #
+#    Updated: 2024/04/13 18:05:11 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 SRCS = 	srcs/ops_push.c srcs/ops_swap.c srcs/ops_rotate.c srcs/ops_rrotate.c \
-		srcs/stk_fns.c srcs/stk_fns_calc.c srcs/stk_fns_pos.c \
-		srcs/stk_utils.c srcs/stk_utils2.c srcs/utils.c \
-		srcs/01-initarg.c srcs/02-initsort.c \
-		srcs/a2b.c push_swap.c
+		srcs/stk_fns.c srcs/stk_fns_node.c srcs/stk_utils.c \
+		srcs/01-initarg.c srcs/02-initsort.c push_swap.c
 
 BSRCS = \
 

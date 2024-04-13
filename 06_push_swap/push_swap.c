@@ -6,13 +6,13 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:04 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/13 15:46:34 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/13 16:33:52 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	printloops(t_stack **list, t_stack **listb)
+/*void	printloops(t_stack **list, t_stack **listb)
 {
 	t_stack	*head;
 	t_stack	*headb;
@@ -39,7 +39,7 @@ void	printloops(t_stack **list, t_stack **listb)
 	}
 	else
 		ft_printf("nil.\n");
-}
+}*/
 
 //#include <stdio.h>
 int	main(int ac, char *av[])
@@ -59,8 +59,6 @@ int	main(int ac, char *av[])
 	stackb = malloc(sizeof(t_stack *));
 	*stackb = NULL;
 	initsort(stacka, stackb);
-//	if (stacka && stackb)
-//		printloops(stacka, stackb);
 	if (!*stacka)
 		return (free(stacka), free(stackb), 1);
 	return (ft_freestack(stacka), free(stackb), 0);

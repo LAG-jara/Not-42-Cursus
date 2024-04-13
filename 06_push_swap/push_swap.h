@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/08 16:49:51 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/13 15:46:43 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/13 18:04:21 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,41 +27,31 @@ typedef struct s_stack
 }					t_stack;
 
 //stk_fns.c
+int		stacksize(t_stack **a);
 t_stack	*ft_stklast(t_stack *lst);
 t_stack	*ft_stknew(int value);
 void	ft_stkadd_back(t_stack **lst, t_stack *node);
 void	ft_freestack(t_stack **lst);
 
-//stk_fns_calc.c
-int		countsteps(t_stack **a, t_stack **b, t_stack *tmp);
-int		countstepsb2a(t_stack **a, t_stack **b, t_stack *tmp);
-t_stack	*cheapest(t_stack **a, t_stack **b);
-t_stack	*cheapestb2a(t_stack **a, t_stack **b);
-
-//stk_fns_pos.c
-void	mintotop(t_stack **a);
-int		stacksize(t_stack **a);
-int		nodepos(t_stack **a, t_stack *node);
-t_stack	*mediannode(t_stack **a);
-
-//stk_utils.c
+//stk_fns_node.c
 t_stack	*nodemax(t_stack **a);
 t_stack	*nodemin(t_stack **a);
 t_stack	*tgta(t_stack **a, t_stack *b);
-t_stack	*tgtb(t_stack **b, t_stack *a);
+int		nodepos(t_stack **a, t_stack *node);
 int		stacksorted(t_stack **a);
-int		stacksortedrev(t_stack **a);
 
-int		indexb2a(t_stack **a, t_stack **b);
-int		indexa2b(t_stack **a, t_stack **b);
-int		stepsreq(int pos, t_stack **a);
+//stk_utils.c
+int		countsteps(t_stack **a, t_stack **b, t_stack *tmp);
+t_stack	*cheapest(t_stack **a, t_stack **b);
+long	ft_atol(const char *str);
+int		ft_strcmp(const char *s1, const char *s2);
+void	ft_free(char **arr);
 
-//a2b.c
-void	qa2b(t_stack **a, t_stack **b);
-void	a2b(t_stack **a, t_stack **b);
-void	b2a(t_stack **a, t_stack **b);
+//01_initarg, 02_initsort
+int		initarg(char **av, t_stack **stacka);
+int		initsort(t_stack **a, t_stack **b);
 
-//ops_push, swap, rotate, rrotate
+//ops_push, rotate, rrotate, swap
 void	pa(t_stack **heada, t_stack **headb);
 void	pb(t_stack **heada, t_stack **headb);
 void	sa(t_stack **heada);
@@ -73,17 +63,5 @@ void	rr(t_stack **heada, t_stack **headb);
 void	rra(t_stack **heada);
 void	rrb(t_stack **headb);
 void	rrr(t_stack **heada, t_stack **headb);
-
-//utils.c
-long	ft_atol(const char *str);
-int		ft_strcmp(const char *s1, const char *s2);
-void	ft_free(char **arr);
-
-//01_initarg, 02_initsort
-int		initarg(char **av, t_stack **stacka);
-int		initsort(t_stack **a, t_stack **b);
-
-//temp
-void	printloops(t_stack **lista, t_stack **listb);
 
 #endif
