@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:58:27 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/14 18:28:28 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/14 18:45:24 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,21 @@ char	**initinput(char *av)
 	int		x;
 	int		y;
 	char	*line;
-	char	**sub;
+//	char	**sub;
 
 	fd = open(av, O_RDONLY);
 	x = 0;
 	y = 0;
 	line = get_next_line(fd);
-	sub = ft_split(line, ' ');
+	ft_printf("%s", line);
+	free(line);
+	return (NULL);
+}
+/*	sub = ft_split(line, ' ');
 	free(line);
 	while (sub[x])
 		x++;
 	ft_free(sub);
 	ft_printf("%d, %d", x, y);
 	return (NULL);
-}
+}*/
