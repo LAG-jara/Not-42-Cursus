@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:58:27 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/14 14:55:26 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/14 18:28:28 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free(char **arr)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (arr[i])
@@ -33,16 +33,12 @@ char	**initinput(char *av)
 	fd = open(av, O_RDONLY);
 	x = 0;
 	y = 0;
-	while ((line = get_next_line(fd)))
-	{
-		sub = ft_split(line, ' ');
-		while (sub[x] && y == 0)
-			x++;
-		ft_printf("%s", line);
-		ft_free(sub);
-		y++;
-	}
-	close(fd);
+	line = get_next_line(fd);
+	sub = ft_split(line, ' ');
+	free(line);
+	while (sub[x])
+		x++;
+	ft_free(sub);
 	ft_printf("%d, %d", x, y);
 	return (NULL);
 }
