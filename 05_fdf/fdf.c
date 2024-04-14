@@ -6,12 +6,12 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/03/28 10:05:33 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/14 14:51:37 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+/*
 int	keyinput(int button)
 {
 	if (button == 65307)
@@ -46,4 +46,13 @@ int	main(int ac, char *av[])
 	if (mlx_ptr)
 		return (mlx_destroy_display(mlx_ptr), free(mlx_ptr), 0);
 	return (0);	
+}*/
+
+int	main(int ac, char *av[])
+{
+//	char	**map;
+
+//	map = NULL;
+	if (ac == 2)
+		initinput(av[1]);
 }

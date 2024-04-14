@@ -6,13 +6,14 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 16:42:25 by cwan              #+#    #+#              #
-#    Updated: 2024/03/28 10:06:27 by cwan             ###   ########.fr        #
+#    Updated: 2024/04/14 13:36:51 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
-SRCS = fdf.c \
+SRCS = srcs/01-input.c \
+		fdf.c \
 
 BSRCS = \
 
@@ -21,6 +22,7 @@ CC = cc
 RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror -g -I .
+
 XFLAGS = -lXext -lX11 -lm
 
 OBJS = $(SRCS:.c=.o)
