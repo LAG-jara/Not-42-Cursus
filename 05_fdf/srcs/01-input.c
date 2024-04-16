@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:58:27 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/14 18:45:24 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/16 18:22:18 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,39 @@ void	ft_free(char **arr)
 	free(arr);
 }
 
-char	**initinput(char *av)
+int	numrow(char *av)
 {
-	int		fd;	
-	int		x;
+	int		fd;
 	int		y;
 	char	*line;
-//	char	**sub;
 
 	fd = open(av, O_RDONLY);
-	x = 0;
 	y = 0;
 	line = get_next_line(fd);
-	ft_printf("%s", line);
-	free(line);
-	return (NULL);
+	while (line)
+	{
+		free(line);
+		y++;
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return (y);
 }
-/*	sub = ft_split(line, ' ');
-	free(line);
-	while (sub[x])
-		x++;
-	ft_free(sub);
-	ft_printf("%d, %d", x, y);
-	return (NULL);
-}*/
+
+char	**initinput(char *av, char **map)
+{
+	int		fd;
+	int		i;
+	int		y;
+
+	i = 0;
+	y = numrow(av);
+
+	map = malloc(sizeof(char *) * (y + 1));
+	fd = open(av, O_RDONLY);
+	while (i <= y)
+		map[i++] = get_next_line(fd);
+	close(fd);
+	map[i] = NULL;
+	return (map);
+}
