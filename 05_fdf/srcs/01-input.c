@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:58:27 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/16 18:22:18 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/19 11:05:35 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	ft_free(char **arr)
 	int		i;
 
 	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
+	if (arr)
+	{
+		while (arr[i])
+			free(arr[i++]);
+		free(arr);
+	}
 }
 
 int	numrow(char *av)
@@ -40,6 +43,31 @@ int	numrow(char *av)
 	close(fd);
 	return (y);
 }
+/*
+int	**numcol(char *line)
+{
+	int	i;
+	int	j;
+	int	**arr;
+
+	i = 0;
+	while (line[i])
+	{
+		if ((line[i] == '-' && (line[i + 1] >= '0' && line[i + 1] <= '9')) \
+		|| (line[i] >= '0' && line[i] <= '9'))
+			j++;
+		while (line[i - 1] != ' ' && line[i])
+		i++;
+	}
+	arr = malloc(sizeof(int *) * (j + 1);
+	arr[j] = '\0';
+	j = 0;
+	while (arr[j])
+	{
+		arr[j] = ft_atoi(ft_strchr(line, ' ');
+	}
+	return (arr);
+}*/
 
 char	**initinput(char *av, char **map)
 {
@@ -52,7 +80,7 @@ char	**initinput(char *av, char **map)
 
 	map = malloc(sizeof(char *) * (y + 1));
 	fd = open(av, O_RDONLY);
-	while (i <= y)
+	while (i < y)
 		map[i++] = get_next_line(fd);
 	close(fd);
 	map[i] = NULL;

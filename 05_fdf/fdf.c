@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/16 18:20:35 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/19 10:45:16 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,11 @@ int	main(int ac, char *av[])
 int	main(int ac, char *av[])
 {
 	char	**map;
-	int		i;
 
 	map = NULL;
-	i = 0;
 	if (ac == 2)
 		map = initinput(av[1], map);
-	while (map[i])
-		ft_printf("%s", map[i++]);
-	if (map)
-		ft_free(map);
+	for (int i = 0; map[i]; i++)
+		ft_printf("%s", map[i]);
+	ft_free(map);
 }
