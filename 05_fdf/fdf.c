@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/24 12:04:13 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/24 14:00:34 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,22 @@ t_mlx	*initmlx(t_mlx *fdf, char *av)
 
 int	main(int ac, char *av[])
 {
-	char	**map;
+//	char	**map;
+	int		**map;
 	t_mlx	*fdf;
 
 	fdf = NULL;
 	map = NULL;
 	if (ac == 2)
-		map = initinput(av[1], map);
+		map = intinput(av[1], map);
 	for (int i = 0; map[i]; i++)
-		ft_printf("%s", map[i]);
+	{
+		for (int j = 0; j < numcol(av[1]); j++)
+			ft_printf("%d ", map[i][j]);
+		ft_printf("\n");
+	}
 	fdf = initmlx(fdf, av[1]);
-	ft_free(map);
+//	ft_free(map);
 	mlx_key_hook(fdf->win, keyinput, fdf);
 	mlx_loop(fdf->ptr);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:58:27 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/24 12:02:31 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/24 13:56:08 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,22 @@ int	numrow(char *av)
 	close(fd);
 	return (y);
 }
-/*
-int	**numcol(char *line)
-{
-	int	i;
-	int	j;
-	int	**arr;
 
-	i = 0;
-	while (line[i])
-	{
-		if ((line[i] == '-' && (line[i + 1] >= '0' && line[i + 1] <= '9')) \
-		|| (line[i] >= '0' && line[i] <= '9'))
-			j++;
-		while (line[i - 1] != ' ' && line[i])
-		i++;
-	}
-	arr = malloc(sizeof(int *) * (j + 1);
-	arr[j] = '\0';
-	j = 0;
-	while (arr[j])
-	{
-		arr[j] = ft_atoi(ft_strchr(line, ' ');
-	}
-	return (arr);
-}*/
+int	numcol(char *av)
+{
+	int		fd;
+	int 	x;
+	char	**line;
+
+	fd = open(av, O_RDONLY);
+	x = 0;
+	line = ft_split(get_next_line(fd), ' ');
+	while (line[x])
+		x++;
+	ft_free(line);
+	close(fd);
+	return (x);
+}
 
 char	**initinput(char *av, char **map)
 {
@@ -85,4 +76,37 @@ char	**initinput(char *av, char **map)
 	close(fd);
 	map[i] = NULL;
 	return (map);
+}
+
+int	**intinput(char *av, int **arr)
+{
+	int	fd;
+	int	i;
+	int	j;
+	int	x;
+	int y;
+	char	**line;
+
+	i = 0;
+	x = numcol(av);
+	y = numrow(av);
+	fd = open(av, O_RDONLY);
+	arr = malloc(sizeof(int *) * (y + 1));
+	while (i < y)
+	{
+		j = 0;
+		line = ft_split(get_next_line(fd), ' ');
+		arr[i] = malloc(sizeof(int) * (x + 1));
+		while (line[j])
+		{
+			arr[i][j] = ft_atoi(line[j]);
+			j++;
+		}
+//		arr[i][j] = '\0';
+		ft_free(line);
+		i++;
+	}
+	arr[i] = NULL;
+	close(fd);
+	return (arr);
 }
