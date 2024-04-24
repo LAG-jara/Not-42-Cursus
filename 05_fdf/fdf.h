@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:22:37 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/19 15:33:43 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/24 12:03:13 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@
 
 typedef struct s_mlx
 {
-	void	*mlx_ptr;
-	void	*mlx_win;
+	void	*ptr;
+	void	*win;
+	void	*img;
+	char	*data_addr;
+	int		bpp;
+	int		linesize;
+	int		endian;
 }			t_mlx;
 
 typedef struct s_point
