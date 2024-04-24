@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/24 14:00:34 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/24 14:22:27 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,19 @@ int	main(int ac, char *av[])
 
 	fdf = NULL;
 	map = NULL;
+	fdf = initmlx(fdf, av[1]);
 	if (ac == 2)
 		map = intinput(av[1], map);
 	for (int i = 0; map[i]; i++)
 	{
 		for (int j = 0; j < numcol(av[1]); j++)
-			ft_printf("%d ", map[i][j]);
+		{
+			mlx_pixel_put(fdf->ptr, fdf->win, (j * 10) + WIDTH / 2, \
+			(i * 10) + HEIGHT / 2, 0xFFFFFF);
+//			ft_printf("%d ", map[i][j]);
+		}
 		ft_printf("\n");
 	}
-	fdf = initmlx(fdf, av[1]);
 //	ft_free(map);
 	mlx_key_hook(fdf->win, keyinput, fdf);
 	mlx_loop(fdf->ptr);
