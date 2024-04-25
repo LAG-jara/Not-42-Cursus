@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:13:20 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/25 18:41:23 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/25 19:14:55 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	maxz(int **map)
 	return (z);
 }
 
-static int	numheight(int **map)
+int	numheight(int **map)
 {
 	int	y;
 	
@@ -45,7 +45,7 @@ static int	numheight(int **map)
 	return (y);
 }
 
-static int	numwidth(int **map)
+int	numwidth(int **map)
 {
 	int	x;
 

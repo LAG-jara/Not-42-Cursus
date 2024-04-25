@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/25 19:06:46 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/25 19:27:34 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,15 @@ void	drawstuff(t_mlx *fdf, int **map, char *av)
 	double	y_rot;
 	double	theta;
 	int		z;
-	int		WIDTH = calcww(map);
-	int		HEIGHT = calcwh(map);
-	double	winscalex = WIDTH / (double)WIDTH;
-	double	winscaley = HEIGHT / (double)HEIGHT;
+	double	WIDTH = calcww(map);
+	double	HEIGHT = calcwh(map);
+	double	winscalex = (WIDTH / (double)numwidth(map));
+	double	winscaley = (HEIGHT / (double)numheight(map));
 
 	y = 0;
 	theta = 45 * M_PI / 180;
+	ft_printf("width is %d, numwidth is %d, winscalex here is %d\n", WIDTH, numwidth(map), winscalex);
+	ft_printf("Height is %d, numheight is %d, winscaley here is %d\n", HEIGHT, numheight(map), winscaley);
 	while (map[y])
 	{
 		x = 0;
