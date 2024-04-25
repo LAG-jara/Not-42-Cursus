@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/24 15:52:52 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/25 18:48:22 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ int	keyinput(int button, void *fdf)
 	return (0);
 }
 
-t_mlx	*initmlx(t_mlx *fdf, char *av)
+t_mlx	*initmlx(t_mlx *fdf, char *av, int **map)
 {
 	char	*title;
+	int		WIDTH = calcww(map);
+	int		HEIGHT = calcwh(map);
 
 	title = ft_strjoin("FdF: ", av);
 	fdf = (t_mlx *)ft_calloc(1, sizeof(t_mlx));
@@ -56,19 +58,30 @@ void	drawstuff(t_mlx *fdf, int **map, char *av)
 	double	y_rot;
 	double	theta;
 	int		z;
+	int		WIDTH = calcww(map);
+	int		HEIGHT = calcwh(map);
+	double	winscalex = 5 * WIDTH / (double)WIDTH;
+	double	winscaley = 5 * HEIGHT / (double)HEIGHT;
 
 	y = 0;
 	theta = 45 * M_PI / 180;
 	while (map[y])
 	{
 		x = 0;
-		while (x < numcol(av))
+		while (x < numcol(av) - 1)
 		{
 			z = map[y][x];
-			x_rot = x * cos(theta) - y * sin(theta) * 0.7;
-			y_rot = x * sin(theta) + y * cos(theta) * 0.7 - (z * 0.5);
-			mlx_pixel_put(fdf->ptr, fdf->win, x_rot * 10 + 50, \
-			y_rot * 10 + 50, 0xFFFFFF);
+			x_rot = x * cos(theta) - y * sin(theta) * winscalex;
+			y_rot = x * sin(theta) + y * cos(theta) * winscaley - (z * 0.5);
+			if (x + 1 < numcol(av) - 1)
+			{
+				int nz = map[y][x + 1];
+				double nx_rot = (x * cos(theta) - (y) * sin(theta)) * (winscalex * 2);
+				double ny_rot = ((x * sin(theta) + (y) * cos(theta)) * winscaley - (nz * 0.5));
+				drawline(fdf, (int)round(x_rot + WIDTH / 2), (int)round(y_rot + HEIGHT / 2), (int)round(nx_rot + WIDTH / 2), (int)round(ny_rot + HEIGHT / 2));
+			}
+//			mlx_pixel_put(fdf->ptr, fdf->win, x_rot * 10 + 50, \
+//			y_rot * 10 + 50, 0xFFFFFF);
 			x++;
 		}
 		y++;
@@ -98,17 +111,16 @@ float	ft_abs(int n)
 
 int	main(int ac, char *av[])
 {
-//	char	**map;
 	int		**map;
 	t_mlx	*fdf;
 
 	fdf = NULL;
 	map = NULL;
-	fdf = initmlx(fdf, av[1]);
 	if (ac == 2)
 		map = intinput(av[1], map);
+	fdf = initmlx(fdf, av[1], map);
 	drawstuff(fdf, map, av[1]);
-//	ft_free(map);
+	ft_freeint(map);
 	mlx_key_hook(fdf->win, keyinput, fdf);
 	mlx_loop(fdf->ptr);
 	return (0);

@@ -6,24 +6,11 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:58:27 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/24 13:56:08 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/25 18:07:38 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	ft_free(char **arr)
-{
-	int		i;
-
-	i = 0;
-	if (arr)
-	{
-		while (arr[i])
-			free(arr[i++]);
-		free(arr);
-	}
-}
 
 int	numrow(char *av)
 {
@@ -48,14 +35,17 @@ int	numcol(char *av)
 {
 	int		fd;
 	int 	x;
-	char	**line;
+	char	*line;
+	char	**splitline;
 
 	fd = open(av, O_RDONLY);
 	x = 0;
-	line = ft_split(get_next_line(fd), ' ');
-	while (line[x])
+	line = get_next_line(fd);
+	splitline = ft_split(line, ' ');
+	while (splitline[x])
 		x++;
-	ft_free(line);
+	free(line);
+	ft_free(splitline);
 	close(fd);
 	return (x);
 }
@@ -85,7 +75,8 @@ int	**intinput(char *av, int **arr)
 	int	j;
 	int	x;
 	int y;
-	char	**line;
+	char	*line;
+	char	**splitline;
 
 	i = 0;
 	x = numcol(av);
@@ -95,15 +86,17 @@ int	**intinput(char *av, int **arr)
 	while (i < y)
 	{
 		j = 0;
-		line = ft_split(get_next_line(fd), ' ');
+		line = get_next_line(fd);
+		splitline = ft_split(line, ' ');
 		arr[i] = malloc(sizeof(int) * (x + 1));
-		while (line[j])
+		while (splitline[j])
 		{
-			arr[i][j] = ft_atoi(line[j]);
+			arr[i][j] = ft_atoi(splitline[j]);
 			j++;
 		}
-//		arr[i][j] = '\0';
-		ft_free(line);
+		arr[i][j] = -999;
+		free(line);
+		ft_free(splitline);
 		i++;
 	}
 	arr[i] = NULL;

@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:22:37 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/24 15:29:56 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/25 18:30:27 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# define WIDTH 1280
-# define HEIGHT 720
+//# define WIDTH 1280
+//# define HEIGHT 720
 
 typedef struct s_mlx
 {
@@ -43,11 +43,20 @@ typedef struct s_point
 	int	col;
 }		t_point;
 
+
+float	ft_abs(int n);
+void	ft_freeint(int **arr);
+
 int		numcol(char *av);
 int		numrow(char *av);
 
 void	ft_free(char **arr);
 char	**initinput(char *av, char **map);
 int		**intinput(char *av, int **arr);
+
+void    drawline(t_mlx *fdf, int x1, int y1, int x2, int y2);
+
+int		calcww(int **map);
+int		calcwh(int **map);
 
 #endif
