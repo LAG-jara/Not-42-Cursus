@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/25 18:48:22 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/25 19:06:46 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	drawstuff(t_mlx *fdf, int **map, char *av)
 	int		z;
 	int		WIDTH = calcww(map);
 	int		HEIGHT = calcwh(map);
-	double	winscalex = 5 * WIDTH / (double)WIDTH;
-	double	winscaley = 5 * HEIGHT / (double)HEIGHT;
+	double	winscalex = WIDTH / (double)WIDTH;
+	double	winscaley = HEIGHT / (double)HEIGHT;
 
 	y = 0;
 	theta = 45 * M_PI / 180;
@@ -74,14 +74,14 @@ void	drawstuff(t_mlx *fdf, int **map, char *av)
 			x_rot = x * cos(theta) - y * sin(theta) * winscalex;
 			y_rot = x * sin(theta) + y * cos(theta) * winscaley - (z * 0.5);
 			if (x + 1 < numcol(av) - 1)
-			{
+/*			{
 				int nz = map[y][x + 1];
 				double nx_rot = (x * cos(theta) - (y) * sin(theta)) * (winscalex * 2);
 				double ny_rot = ((x * sin(theta) + (y) * cos(theta)) * winscaley - (nz * 0.5));
 				drawline(fdf, (int)round(x_rot + WIDTH / 2), (int)round(y_rot + HEIGHT / 2), (int)round(nx_rot + WIDTH / 2), (int)round(ny_rot + HEIGHT / 2));
-			}
-//			mlx_pixel_put(fdf->ptr, fdf->win, x_rot * 10 + 50, \
-//			y_rot * 10 + 50, 0xFFFFFF);
+			}*/
+			mlx_pixel_put(fdf->ptr, fdf->win, x_rot * 10 + 50, \
+			y_rot * 10 + 50, 0xFFFFFF);
 			x++;
 		}
 		y++;
