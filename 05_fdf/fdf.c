@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/29 10:28:29 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/29 12:22:21 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,24 @@ void	drawstuff(t_mlx *fdf, int **map)
 	}
 }
 
+void	drawstrline(t_mlx *fdf, int beginX, int beginY, int endX, int endY)
+{
+	double xd = endX - beginX;
+	double yd = endY - beginY;
+	int	pixels = sqrt((xd * xd) + (yd * yd));
+	xd /= pixels;
+	yd /= pixels;
+	double pixelx = 10;
+	double pixely = 10;
+	while (pixels)
+	{
+		mlx_pixel_put(fdf->ptr, fdf->win, pixelx, pixely, 0xFFFFFF);
+		pixelx += xd;
+		pixely += yd;
+		--pixels;
+	}
+}
+
 float	ft_abs(int n)
 {
 	if (n < 0)
@@ -94,6 +112,7 @@ int	main(int ac, char *av[])
 		map = intinput(av[1], map);
 	fdf = initmlx(fdf, av[1]);
 	drawstuff(fdf, map);
+	drawstrline(fdf, 10, 10, 500, 500);
 	ft_freeint(map);
 	mlx_key_hook(fdf->win, keyinput, fdf);
 	mlx_loop(fdf->ptr);

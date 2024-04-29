@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:13:20 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/25 19:14:55 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/29 12:18:48 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	calcwh(int **map)
 {
 	return((int)ceil(numwidth(map)) * 20 * (1 + maxz(map) / (2 * numheight(map))));
 }
-
+/*
 void	drawline(t_mlx *fdf, int x1, int y1, int x2, int y2)
 {
 	int	dx = x2 - x1;
@@ -82,4 +82,4 @@ void	drawline(t_mlx *fdf, int x1, int y1, int x2, int y2)
 		x += x_inc;
 		y += y_inc;
 	}
-}
+}*/

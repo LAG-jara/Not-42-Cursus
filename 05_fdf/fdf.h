@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:22:37 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/29 10:21:50 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/29 12:17:23 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_free(char **arr);
 char	**initinput(char *av, char **map);
 int		**intinput(char *av, int **arr);
 
-void    drawline(t_mlx *fdf, int x1, int y1, int x2, int y2);
+//void    drawline(t_mlx *fdf, int x1, int y1, int x2, int y2);
 
 int		calcww(int **map);
 int		calcwh(int **map);
