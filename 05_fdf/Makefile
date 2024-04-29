@@ -6,14 +6,14 @@
 #    By: cwan <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/08 16:42:25 by cwan              #+#    #+#              #
-#    Updated: 2024/04/25 17:24:17 by cwan             ###   ########.fr        #
+#    Updated: 2024/04/29 14:44:51 by cwan             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
 SRCS = srcs/01-input.c \
-		srcs/calc.c srcs/utils.c \
+		srcs/utils.c \
 		fdf.c \
 
 BSRCS = \

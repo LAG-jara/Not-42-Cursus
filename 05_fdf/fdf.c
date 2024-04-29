@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/29 12:22:21 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/29 14:40:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ t_mlx	*initmlx(t_mlx *fdf, char *av)
 	fdf->img = mlx_new_image(fdf->ptr, WIDTH, HEIGHT);
 	if (!fdf->img)
 		return (ft_putstr_fd("Fdf init image failed", 2), NULL);
-	fdf->data_addr = mlx_get_data_addr(fdf->img, &fdf->bpp, &fdf->linesize,\
-	 &fdf->endian);
+//	fdf->data_addr = mlx_get_data_addr(fdf->img, &fdf->bpp, &fdf->linesize,\
+//	 &fdf->endian);
 	return(fdf);
 }
 
@@ -62,7 +62,7 @@ void	drawstuff(t_mlx *fdf, int **map)
 	while (map[y])
 	{
 		x = 0;
-		while (x < numwidth(map))
+		while (x < fdf->cols)
 		{
 			z = map[y][x];
 			x_rot = x * cos(theta) - y * sin(theta) * 0.7;
@@ -82,8 +82,8 @@ void	drawstrline(t_mlx *fdf, int beginX, int beginY, int endX, int endY)
 	int	pixels = sqrt((xd * xd) + (yd * yd));
 	xd /= pixels;
 	yd /= pixels;
-	double pixelx = 10;
-	double pixely = 10;
+	double pixelx = 100;
+	double pixely = 100;
 	while (pixels)
 	{
 		mlx_pixel_put(fdf->ptr, fdf->win, pixelx, pixely, 0xFFFFFF);
@@ -93,14 +93,6 @@ void	drawstrline(t_mlx *fdf, int beginX, int beginY, int endX, int endY)
 	}
 }
 
-float	ft_abs(int n)
-{
-	if (n < 0)
-		return (-n);
-	else
-		return (n);
-}
-
 int	main(int ac, char *av[])
 {
 	int		**map;
@@ -108,9 +100,9 @@ int	main(int ac, char *av[])
 
 	fdf = NULL;
 	map = NULL;
-	if (ac == 2)
-		map = intinput(av[1], map);
 	fdf = initmlx(fdf, av[1]);
+	if (ac == 2)
+		map = intinput(av[1], fdf, map);
 	drawstuff(fdf, map);
 	drawstrline(fdf, 10, 10, 500, 500);
 	ft_freeint(map);
