@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/25 19:27:34 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/29 10:28:29 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@ int	keyinput(int button, void *fdf)
 	return (0);
 }
 
-t_mlx	*initmlx(t_mlx *fdf, char *av, int **map)
+t_mlx	*initmlx(t_mlx *fdf, char *av)
 {
 	char	*title;
-	int		WIDTH = calcww(map);
-	int		HEIGHT = calcwh(map);
 
 	title = ft_strjoin("FdF: ", av);
 	fdf = (t_mlx *)ft_calloc(1, sizeof(t_mlx));
@@ -50,7 +48,7 @@ t_mlx	*initmlx(t_mlx *fdf, char *av, int **map)
 	return(fdf);
 }
 
-void	drawstuff(t_mlx *fdf, int **map, char *av)
+void	drawstuff(t_mlx *fdf, int **map)
 {
 	int		x;
 	int		y;
@@ -58,30 +56,17 @@ void	drawstuff(t_mlx *fdf, int **map, char *av)
 	double	y_rot;
 	double	theta;
 	int		z;
-	double	WIDTH = calcww(map);
-	double	HEIGHT = calcwh(map);
-	double	winscalex = (WIDTH / (double)numwidth(map));
-	double	winscaley = (HEIGHT / (double)numheight(map));
 
 	y = 0;
-	theta = 45 * M_PI / 180;
-	ft_printf("width is %d, numwidth is %d, winscalex here is %d\n", WIDTH, numwidth(map), winscalex);
-	ft_printf("Height is %d, numheight is %d, winscaley here is %d\n", HEIGHT, numheight(map), winscaley);
+	theta = 30 * M_PI / 180;
 	while (map[y])
 	{
 		x = 0;
-		while (x < numcol(av) - 1)
+		while (x < numwidth(map))
 		{
 			z = map[y][x];
-			x_rot = x * cos(theta) - y * sin(theta) * winscalex;
-			y_rot = x * sin(theta) + y * cos(theta) * winscaley - (z * 0.5);
-			if (x + 1 < numcol(av) - 1)
-/*			{
-				int nz = map[y][x + 1];
-				double nx_rot = (x * cos(theta) - (y) * sin(theta)) * (winscalex * 2);
-				double ny_rot = ((x * sin(theta) + (y) * cos(theta)) * winscaley - (nz * 0.5));
-				drawline(fdf, (int)round(x_rot + WIDTH / 2), (int)round(y_rot + HEIGHT / 2), (int)round(nx_rot + WIDTH / 2), (int)round(ny_rot + HEIGHT / 2));
-			}*/
+			x_rot = x * cos(theta) - y * sin(theta) * 0.7;
+			y_rot = x * sin(theta) + y * cos(theta) * 0.7 - (z * 0.5);
 			mlx_pixel_put(fdf->ptr, fdf->win, x_rot * 10 + 50, \
 			y_rot * 10 + 50, 0xFFFFFF);
 			x++;
@@ -97,19 +82,6 @@ float	ft_abs(int n)
 	else
 		return (n);
 }
-/*
-      // Check for valid neighbors (adjust conditions based on your map dimensions)
-      if (y + 1 < max_y) {
-        // Calculate neighbor's rotated coordinates (downward neighbor)
-        int neighbor_z = map[y + 1][x];
-//        double neighbor_x_rot = (x * cos(theta) - (y + 1) * sin(theta)) * isometric_scale_x;
-        double neighbor_y_rot = ((x * sin(theta) + (y + 1) * cos(theta)) * isometric_scale_y) - (neighbor_z * depth_scale);
-        // Draw line using mlx_pixel_put (adjust loop for all neighbors)
-        for (int i = 0; i <= ft_abs(y_rot - neighbor_y_rot); i++) { // Adjust loop based on line drawing approach
-          double y_step = y_rot + ((neighbor_y_rot - y_rot) / ft_abs(y_rot - neighbor_y_rot)) * i;
-          mlx_pixel_put(fdf->ptr, fdf->win, (x_rot * 10) + WIDTH / 2,
-                        y_step + HEIGHT / 2, 0xFFFFFF);
-}*/
 
 int	main(int ac, char *av[])
 {
@@ -120,8 +92,8 @@ int	main(int ac, char *av[])
 	map = NULL;
 	if (ac == 2)
 		map = intinput(av[1], map);
-	fdf = initmlx(fdf, av[1], map);
-	drawstuff(fdf, map, av[1]);
+	fdf = initmlx(fdf, av[1]);
+	drawstuff(fdf, map);
 	ft_freeint(map);
 	mlx_key_hook(fdf->win, keyinput, fdf);
 	mlx_loop(fdf->ptr);

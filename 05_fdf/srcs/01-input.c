@@ -6,13 +6,13 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:58:27 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/25 18:07:38 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/29 10:11:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	numrow(char *av)
+static int	numrow(char *av)
 {
 	int		fd;
 	int		y;
@@ -31,7 +31,7 @@ int	numrow(char *av)
 	return (y);
 }
 
-int	numcol(char *av)
+static int	numcol(char *av)
 {
 	int		fd;
 	int 	x;
