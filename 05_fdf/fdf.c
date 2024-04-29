@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/29 15:22:31 by cwan             ###   ########.fr       */
+/*   Updated: 2024/04/30 04:33:06 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int ac, char *av[])
 	else
 		return (0);
 	drawstuff(fdf, map);
-	drawstrline(fdf, 10, 10, 500, 500);
+	drawstrline(fdf, 10, 10, 100, 100);
 	mlx_key_hook(fdf->win, keyinput, fdf);
 	mlx_loop(fdf->ptr);
 	return (ft_freeint(map), 0);
