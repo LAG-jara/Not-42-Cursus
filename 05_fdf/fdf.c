@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/30 04:33:06 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/04/30 10:34:13 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,24 @@ void	drawstuff(t_mlx *fdf, int **map)
 {
 	int		x;
 	int		y;
-	double	x_rot;
-	double	y_rot;
-	double	theta;
 	int		z;
 
 	y = 0;
-	theta = 30 * M_PI / 180;
-	while (map[y])
+	fdf->theta = 30 * M_PI / 180;
+	if (fdf->rows < fdf->cols)
+		fdf->scale = ((double)800 / fdf->rows) / 2;
+	else
+		fdf->scale = ((double)800 / fdf->cols) / 2;
+	while (y < fdf->rows)
 	{
 		x = 0;
 		while (x < fdf->cols)
 		{
 			z = map[y][x];
-			x_rot = x * cos(theta) - y * sin(theta) * 0.7;
-			y_rot = x * sin(theta) + y * cos(theta) * 0.7 - (z * 0.5);
-			mlx_pixel_put(fdf->ptr, fdf->win, x_rot * 10 + 50, \
-			y_rot * 10 + 50, 0xFFFFFF);
+			fdf->x_rot = x * cos(fdf->theta) - y * sin(fdf->theta) * 0.7;
+			fdf->y_rot = x * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.2);
+			mlx_pixel_put(fdf->ptr, fdf->win, fdf->x_rot * fdf->scale + 200, \
+			fdf->y_rot * fdf->scale + 100, 0xFFFFFF);
 			x++;
 		}
 		y++;
