@@ -6,11 +6,14 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/04/30 10:34:13 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/01 13:34:25 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+#include <stdio.h>
+void	drawstrline(t_mlx *fdf, int beginX, int beginY, int endX, int endY);
 
 void	drawstuff(t_mlx *fdf, int **map)
 {
@@ -31,9 +34,15 @@ void	drawstuff(t_mlx *fdf, int **map)
 		{
 			z = map[y][x];
 			fdf->x_rot = x * cos(fdf->theta) - y * sin(fdf->theta) * 0.7;
-			fdf->y_rot = x * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.2);
-			mlx_pixel_put(fdf->ptr, fdf->win, fdf->x_rot * fdf->scale + 200, \
-			fdf->y_rot * fdf->scale + 100, 0xFFFFFF);
+			fdf->y_rot = x * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.1);
+			if (x != fdf->cols)
+			{
+				z = map[y][x + 1];
+				fdf->x_rotnext = (x + 1) * cos(fdf->theta) - y * sin(fdf->theta) * 0.7;
+				fdf->y_rotnext = (x + 1) * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.1);
+				drawstrline(fdf, fdf->x_rot * fdf->scale + 200, fdf->y_rot * fdf->scale + 100, fdf->x_rotnext * fdf->scale + 200, fdf->y_rotnext * fdf->scale + 100);
+			}
+			mlx_pixel_put(fdf->ptr, fdf->win, fdf->x_rot * fdf->scale + 200, fdf->y_rot * fdf->scale + 100, 0xFFFFFF);
 			x++;
 		}
 		y++;
@@ -47,11 +56,11 @@ void	drawstrline(t_mlx *fdf, int beginX, int beginY, int endX, int endY)
 	int	pixels = sqrt((xd * xd) + (yd * yd));
 	xd /= pixels;
 	yd /= pixels;
-	double pixelx = 100;
-	double pixely = 100;
+	double pixelx = beginX;
+	double pixely = beginY;
 	while (pixels)
 	{
-		mlx_pixel_put(fdf->ptr, fdf->win, pixelx, pixely, 0xFFFFFF);
+		mlx_pixel_put(fdf->ptr, fdf->win, (int)pixelx, (int)pixely, 0xFFFFFF);
 		pixelx += xd;
 		pixely += yd;
 		--pixels;
@@ -73,7 +82,7 @@ int	main(int ac, char *av[])
 	else
 		return (0);
 	drawstuff(fdf, map);
-	drawstrline(fdf, 10, 10, 100, 100);
+//	drawstrline(fdf, 10, 10, 100, 100);
 	mlx_key_hook(fdf->win, keyinput, fdf);
 	mlx_loop(fdf->ptr);
 	return (ft_freeint(map), 0);
