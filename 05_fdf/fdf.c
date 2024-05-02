@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/01 13:34:25 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/02 09:31:11 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,22 @@ void	drawstuff(t_mlx *fdf, int **map)
 		{
 			z = map[y][x];
 			fdf->x_rot = x * cos(fdf->theta) - y * sin(fdf->theta) * 0.7;
-			fdf->y_rot = x * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.1);
-			if (x != fdf->cols)
+			fdf->y_rot = x * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.2);
+			if (x < fdf->cols)
 			{
 				z = map[y][x + 1];
 				fdf->x_rotnext = (x + 1) * cos(fdf->theta) - y * sin(fdf->theta) * 0.7;
-				fdf->y_rotnext = (x + 1) * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.1);
+				fdf->y_rotnext = (x + 1) * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.2);
 				drawstrline(fdf, fdf->x_rot * fdf->scale + 200, fdf->y_rot * fdf->scale + 100, fdf->x_rotnext * fdf->scale + 200, fdf->y_rotnext * fdf->scale + 100);
 			}
-			mlx_pixel_put(fdf->ptr, fdf->win, fdf->x_rot * fdf->scale + 200, fdf->y_rot * fdf->scale + 100, 0xFFFFFF);
+			if (map[y + 1])
+			{
+				z = map[y + 1][x];
+				fdf->x_rotnext = x * cos(fdf->theta) - (y + 1) * sin(fdf->theta) * 0.7;
+				fdf->y_rotnext = x * sin(fdf->theta) + (y + 1) * cos(fdf->theta) * 0.7 - (z * 0.2);
+				drawstrline(fdf, fdf->x_rot * fdf->scale + 200, fdf->y_rot * fdf->scale + 100, fdf->x_rotnext * fdf->scale + 200, fdf->y_rotnext * fdf->scale + 100);
+			}
+//			mlx_pixel_put(fdf->ptr, fdf->win, fdf->x_rot * fdf->scale + 200, fdf->y_rot * fdf->scale + 100, 0xFFFFFF);
 			x++;
 		}
 		y++;
