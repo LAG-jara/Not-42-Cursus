@@ -6,49 +6,32 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/02 14:33:53 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/02 17:19:21 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-#include <stdio.h>
+void	setxy(t_mlx *fdf, int **map,  int x, int y);
+void	setxyn(t_mlx *fdf, int **map, int x, int y);
 void	drawstrline(t_mlx *fdf, int beginX, int beginY, int endX, int endY);
 
 void	drawstuff(t_mlx *fdf, int **map)
 {
 	int		x;
 	int		y;
-	int		z;
 
 	y = 0;
-	fdf->theta = 30 * M_PI / 180;
-	if (fdf->rows < fdf->cols)
-		fdf->scale = ((double)800 / fdf->rows) / 2;
-	else
-		fdf->scale = ((double)800 / fdf->cols) / 2;
 	while (y < fdf->rows)
 	{
 		x = 0;
 		while (x < fdf->cols)
 		{
-			z = map[y][x];
-			fdf->x_rot = x * cos(fdf->theta) - y * sin(fdf->theta) * 0.7;
-			fdf->y_rot = x * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.2);
+			setxy(fdf, map, x, y);
 			if (x + 1 < fdf->cols)
-			{
-				z = map[y][x + 1];
-				fdf->x_rotnext = (x + 1) * cos(fdf->theta) - y * sin(fdf->theta) * 0.7;
-				fdf->y_rotnext = (x + 1) * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.2);
-				drawstrline(fdf, fdf->x_rot * fdf->scale + 200, fdf->y_rot * fdf->scale + 100, fdf->x_rotnext * fdf->scale + 200, fdf->y_rotnext * fdf->scale + 100);
-			}
+				setxyn(fdf, map, x + 1, y);
 			if (y + 1 < fdf->rows)
-			{
-				z = map[y + 1][x];
-				fdf->x_rotnext = x * cos(fdf->theta) - (y + 1) * sin(fdf->theta) * 0.7;
-				fdf->y_rotnext = x * sin(fdf->theta) + (y + 1) * cos(fdf->theta) * 0.7 - (z * 0.2);
-				drawstrline(fdf, fdf->x_rot * fdf->scale + 200, fdf->y_rot * fdf->scale + 100, fdf->x_rotnext * fdf->scale + 200, fdf->y_rotnext * fdf->scale + 100);
-			}
+				setxyn(fdf, map, x, y + 1);
 //			mlx_pixel_put(fdf->ptr, fdf->win, fdf->x_rot * fdf->scale + 200, fdf->y_rot * fdf->scale + 100, 0xFFFFFF);
 			x++;
 		}
@@ -74,6 +57,57 @@ void	drawstrline(t_mlx *fdf, int beginX, int beginY, int endX, int endY)
 	}
 }
 
+void	setxy(t_mlx *fdf, int **map, int x, int y)
+{
+	int z;
+
+	z = map[y][x];
+	fdf->x_rot = x * cos(fdf->theta) - y * sin(fdf->theta) * 0.7;
+	fdf->y_rot = x * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.2);
+}
+
+void	setxyn(t_mlx *fdf, int **map, int x, int y)
+{
+	int	z;
+
+	z = map[y][x];
+	fdf->x_rotnext = x * cos(fdf->theta) - y * sin(fdf->theta) * 0.7;
+	fdf->y_rotnext = x * sin(fdf->theta) + y * cos(fdf->theta) * 0.7 - (z * 0.2);
+	drawstrline(fdf, fdf->x_rot * fdf->scale + 200, fdf->y_rot * fdf->scale + 100, fdf->x_rotnext * fdf->scale + 200, fdf->y_rotnext * fdf->scale + 100);
+}
+
+/*
+t_img	*drawstuff(t_mlx *fdf, int **map)
+{
+	int		x;
+	int		y;
+	int		z;
+	t_img	*img;
+	int		*data;
+
+	img = mlx_new_image(fdf->ptr, WIDTH, HEIGHT);
+	if (!img)
+		return (NULL);
+	img->data = (int *)mlx_get_data_addr(img, &img->bpp, &img->len, &img->endian;
+	y = 0;
+	while (y < fdf->rows)
+	{
+		x = 0;
+		while (x < fdf->cols)
+
+	}
+	return (img);
+}*/
+
+void	fdfvalues(t_mlx *fdf)
+{
+	fdf->theta = 30 * M_PI / 180;
+	if (fdf->rows < fdf->cols)
+		fdf->scale = ((double)1000 / fdf->rows) / 2;
+	else
+		fdf->scale = ((double)1200 / fdf->cols) / 2;
+}
+
 int	main(int ac, char *av[])
 {
 	int		**map;
@@ -85,9 +119,12 @@ int	main(int ac, char *av[])
 	{
 		fdf = initmlx(fdf, av[1]);
 		map = intinput(av[1], fdf, map);
+//		img = mlx_new_image(fdf->ptr, WIDTH, HEIGHT);
 	}
 	else
 		return (0);
+//	mlx_put_image_to_window (fdf->ptr, fdf->win, img, 0, 0);
+	fdfvalues(fdf);
 	drawstuff(fdf, map);
 	mlx_key_hook(fdf->win, keyinput, fdf);
 	mlx_loop(fdf->ptr);
