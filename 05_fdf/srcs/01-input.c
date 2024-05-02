@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:58:27 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/02 15:49:59 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/02 19:02:53 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	keyinput(int button, void *fdf)
 	{
 		mlx_destroy_image(((t_mlx *)fdf)->ptr, ((t_mlx *)fdf)->img);
 		mlx_destroy_window(((t_mlx *)fdf)->ptr, ((t_mlx *)fdf)->win);
-		free(((t_mlx *)fdf)->ptr);
+		mlx_destroy_display(fdf);
+//		free(((t_mlx *)fdf)->ptr);
 		free(fdf);
 		exit(0);
 	}
