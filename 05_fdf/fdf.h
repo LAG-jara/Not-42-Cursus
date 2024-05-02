@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:22:37 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/02 14:31:05 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/02 17:19:32 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
+//# include <stdlib.h>
+//# include <stdio.h>
 # define WIDTH 1200
 # define HEIGHT 1000
 
