@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:22:37 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/01 16:40:38 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/02 14:31:05 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 1200
+# define HEIGHT 1000
 
 typedef struct s_mlx
 {
@@ -38,6 +38,15 @@ typedef struct s_mlx
 	double	y_rotnext;
 	double	scale;
 }			t_mlx;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		len;
+	int		endian;
+}			t_img;
 
 int		keyinput(int button, void *fdf);
 t_mlx	*initmlx(t_mlx *fdf, char *av);
