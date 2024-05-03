@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:58:27 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/02 19:02:53 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/03 10:55:27 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@ int	keyinput(int button, void *fdf)
 {
 	if (button == XK_Escape || button == 0)
 	{
-		mlx_destroy_image(((t_mlx *)fdf)->ptr, ((t_mlx *)fdf)->img);
-		mlx_destroy_window(((t_mlx *)fdf)->ptr, ((t_mlx *)fdf)->win);
-		mlx_destroy_display(fdf);
-//		free(((t_mlx *)fdf)->ptr);
-		free(fdf);
+		t_mlx	*mlx;
+
+		mlx = (t_mlx *)fdf;
+		mlx_destroy_image(mlx->ptr, mlx->img);
+		mlx_destroy_window(mlx->ptr, mlx->win);
+		mlx_destroy_display(mlx->ptr);
+		free(mlx->ptr);
+		ft_freeint(mlx->map);
+		free(mlx);
 		exit(0);
 	}
 	return (0);
@@ -85,7 +89,7 @@ static int	numcol(char *av)
 	return (x);
 }
 
-int	**intinput(char *av, t_mlx *fdf, int **arr)
+int	intinput(char *av, t_mlx *fdf)
 {
 	int		fd;
 	int		i;
@@ -97,18 +101,18 @@ int	**intinput(char *av, t_mlx *fdf, int **arr)
 	fdf->cols = numcol(av);
 	fdf->rows = numrow(av);
 	fd = open(av, O_RDONLY);
-	arr = malloc(sizeof(int *) * (fdf->rows + 1));
+	fdf->map = malloc(sizeof(int *) * (fdf->rows + 1));
 	while (i < fdf->rows)
 	{
 		j = -1;
 		line = get_next_line(fd);
 		splitline = ft_split(line, ' ');
-		arr[i] = malloc(sizeof(int) * (fdf->cols));
+		fdf->map[i] = malloc(sizeof(int) * (fdf->cols));
 		while (splitline[++j])
-			arr[i][j] = ft_atoi(splitline[j]);
+			fdf->map[i][j] = ft_atoi(splitline[j]);
 		(void)(free(line), ft_free(splitline));
 		i++;
 	}
-	arr[i] = NULL;
-	return (close(fd), arr);
+	fdf->map[i] = NULL;
+	return (close(fd), 0);
 }
