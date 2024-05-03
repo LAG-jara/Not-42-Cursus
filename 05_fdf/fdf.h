@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:22:37 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/02 17:19:32 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/03 10:39:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_mlx
 	void	*ptr;
 	void	*win;
 	void	*img;
+	int		**map;
 	int		cols;
 	int		rows;
 	double	theta;
@@ -50,7 +51,7 @@ typedef struct s_img
 
 int		keyinput(int button, void *fdf);
 t_mlx	*initmlx(t_mlx *fdf, char *av);
-int		**intinput(char *av, t_mlx *fdf, int **arr);
+int		intinput(char *av, t_mlx *fdf);
 
 float	ft_abs(int n);
 void	ft_freeint(int **arr);
