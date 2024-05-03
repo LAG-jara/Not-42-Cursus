@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:22:37 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/03 10:39:36 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/03 13:19:34 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,17 @@ typedef struct s_mlx
 	double	x_rotnext;
 	double	y_rotnext;
 	double	scale;
-}			t_mlx;
-
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
+	char	*data;
 	int		bpp;
-	int		len;
+	int		size_line;
 	int		endian;
-}			t_img;
+}			t_mlx;
 
 int		keyinput(int button, void *fdf);
 t_mlx	*initmlx(t_mlx *fdf, char *av);
 int		intinput(char *av, t_mlx *fdf);
 
+void	fdfvalues(t_mlx *fdf);
 float	ft_abs(int n);
 void	ft_freeint(int **arr);
 void	ft_free(char **arr);
