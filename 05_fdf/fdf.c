@@ -6,22 +6,11 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/06 09:31:05 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/06 13:56:09 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	drawstuff(t_mlx *fdf);
-
-int	render_loop(void *param)
-{
-	t_mlx *fdf = (t_mlx *)param;
-	ft_memset(fdf->data, 0, WIDTH * HEIGHT * 4);
-	drawstuff(fdf);
-	mlx_put_image_to_window(fdf->ptr, fdf->win, fdf->img, 0, 0);
-	return (0);
-}
 
 void	drawline(t_mlx *fdf, int beginX, int beginY, int endX, int endY)
 {
@@ -32,7 +21,6 @@ void	drawline(t_mlx *fdf, int beginX, int beginY, int endX, int endY)
 	yd /= pixels;
 	double pixelx = beginX;
 	double pixely = beginY;
-//	int *image = (int *)fdf->data;
 
 	while (pixels)
 	{
@@ -48,14 +36,6 @@ void	drawline(t_mlx *fdf, int beginX, int beginY, int endX, int endY)
 		pixely += yd;
 		--pixels;
 	}
-/*	while (pixels)
-	{
-		int index = ((int)pixely * fdf->size_line / 4) + (int)pixelx;
-		image[index] = 0xFFFFFF;
-		pixelx += xd;
-		pixely += yd;
-		--pixels;
-	}*/
 }
 
 void	setxy(t_mlx *fdf, int x, int y)
@@ -120,10 +100,10 @@ int	main(int ac, char *av[])
 	}
 	else
 		return (0);
-//	mlx_put_image_to_window (fdf->ptr, fdf->win, fdf->img, 0, 0);
 	fdfvalues(fdf);
-	mlx_loop_hook(fdf->ptr, render_loop, fdf);
-//	drawstuff(fdf);
+
+	drawstuff(fdf);
+	mlx_put_image_to_window (fdf->ptr, fdf->win, fdf->img, 0, 0);
 	mlx_key_hook(fdf->win, keyinput, fdf);
 	mlx_loop(fdf->ptr);
 	return (0);

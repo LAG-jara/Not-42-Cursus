@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   02-mlxutils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 16:43:13 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/03 12:09:56 by cwan             ###   ########.fr       */
+/*   Created: 2024/05/06 14:21:11 by cwan              #+#    #+#             */
+/*   Updated: 2024/05/06 14:26:01 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,20 @@ void	fdfvalues(t_mlx *fdf)
 		fdf->scale = ((double)1200 / fdf->cols) / 2;
 }
 
-float	ft_abs(int n)
+int	keyinput(int button, void *fdf)
 {
-	if (n < 0)
-		return (-n);
-	else
-		return (n);
-}
+	t_mlx	*mlx;
 
-void	ft_freeint(int **arr)
-{
-	int	i;
-
-	i = 0;
-	if (arr)
+	if (button == XK_Escape || button == 0)
 	{
-		while (arr[i])
-			free(arr[i++]);
-		free(arr);
+		mlx = (t_mlx *)fdf;
+		mlx_destroy_image(mlx->ptr, mlx->img);
+		mlx_destroy_window(mlx->ptr, mlx->win);
+		mlx_destroy_display(mlx->ptr);
+		free(mlx->ptr);
+		ft_freeint(mlx->map);
+		free(mlx);
+		exit(0);
 	}
-}
-
-void	ft_free(char **arr)
-{
-	int	i;
-
-	i = 0;
-	if (arr)
-	{
-		while (arr[i])
-			free(arr[i++]);
-		free(arr);
-	}
+	return (0);
 }
