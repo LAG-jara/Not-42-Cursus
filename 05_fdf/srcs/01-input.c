@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:58:27 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/03 10:55:27 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/06 09:14:34 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int	intinput(char *av, t_mlx *fdf)
 	fdf->rows = numrow(av);
 	fd = open(av, O_RDONLY);
 	fdf->map = malloc(sizeof(int *) * (fdf->rows + 1));
+	if (!fdf->map)
+		return (close(fd), ft_putstr_fd("Fdf malloc failed", 2), 1);
 	while (i < fdf->rows)
 	{
 		j = -1;
