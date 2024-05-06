@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/06 13:56:09 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/06 18:16:36 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int ac, char *av[])
 	t_mlx	*fdf;
 
 	fdf = NULL;
-	if (ac == 2)
+	if (ac == 2 && !ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".fdf", 4))
 	{
 		fdf = initmlx(fdf, av[1]);
 		if (!fdf)
