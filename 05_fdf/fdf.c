@@ -6,11 +6,22 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/06 08:59:42 by cwan42           ###   ########.fr       */
+/*   Updated: 2024/05/06 09:23:53 by cwan42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	drawstuff(t_mlx *fdf);
+
+int	render_loop(void *param)
+{
+	t_mlx *fdf = (t_mlx *)param;
+	ft_memset(fdf->data, 0, WIDTH * HEIGHT * 4);
+	drawstuff(fdf);
+	mlx_put_image_to_window(fdf->ptr, fdf->win, fdf->img, 0, 0);
+	return (0);
+}
 
 void	drawline(t_mlx *fdf, int beginX, int beginY, int endX, int endY)
 {
@@ -21,16 +32,30 @@ void	drawline(t_mlx *fdf, int beginX, int beginY, int endX, int endY)
 	yd /= pixels;
 	double pixelx = beginX;
 	double pixely = beginY;
-	int *image = (int *)fdf->data;
+//	int *image = (int *)fdf->data;
 
 	while (pixels)
+	{
+		int x = (int)pixelx;
+		int y = (int)pixely;
+	
+		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+		{
+			int index = (y *fdf->size_line) + (x * (fdf->bpp / 8));
+			*(unsigned int *)(fdf->data + index) = 0x00FFFFFF;
+		}
+		pixelx += xd;
+		pixely += yd;
+		--pixels;
+	}
+/*	while (pixels)
 	{
 		int index = ((int)pixely * fdf->size_line / 4) + (int)pixelx;
 		image[index] = 0xFFFFFF;
 		pixelx += xd;
 		pixely += yd;
 		--pixels;
-	}
+	}*/
 }
 
 void	setxy(t_mlx *fdf, int x, int y)
@@ -58,6 +83,11 @@ void	drawstuff(t_mlx *fdf)
 	int		y;
 
 	fdf->data = mlx_get_data_addr(fdf->img, &fdf->bpp, &fdf->size_line, &fdf->endian);
+	if (!fdf->data)
+	{
+		ft_putstr_fd("Fdf data addr failed\n", 2);
+		return ;
+	}
 	y = 0;
 	while (y < fdf->rows)
 	{
@@ -83,13 +113,15 @@ int	main(int ac, char *av[])
 	if (ac == 2)
 	{
 		fdf = initmlx(fdf, av[1]);
-		intinput(av[1], fdf);
+		if (intinput(av[1], fdf))
+			return (ft_freeint(fdf->map), free(fdf), 1);
 	}
 	else
 		return (0);
-	mlx_put_image_to_window (fdf->ptr, fdf->win, fdf->img, 0, 0);
+//	mlx_put_image_to_window (fdf->ptr, fdf->win, fdf->img, 0, 0);
 	fdfvalues(fdf);
-	drawstuff(fdf);
+	mlx_loop_hook(fdf->ptr, render_loop, fdf);
+//	drawstuff(fdf);
 	mlx_key_hook(fdf->win, keyinput, fdf);
 	mlx_loop(fdf->ptr);
 	return (0);
