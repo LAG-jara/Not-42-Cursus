@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:22:37 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/07 12:18:53 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/07 12:39:44 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int		intinput(char *av, t_mlx *fdf);
 t_mlx	*initmlx(t_mlx *fdf, char *av);
 
 //02-mlxutils.c
-int		keyinput(int button, void *fdf);
-void    drawstuff(t_mlx *fdf);
+void	drawstuff(t_mlx *fdf);
 
 //03-utils.c
+int		keyinput(int button, void *fdf);
 void	ft_freeint(int **arr);
 void	ft_free(char **arr);
 

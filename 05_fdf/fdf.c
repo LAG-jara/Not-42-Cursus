@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/07 11:59:26 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/07 12:43:05 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char *av[])
 			return (ft_freeint(fdf->map), free(fdf), 1);
 	}
 	else
-		return (0);
+		return (ft_putstr_fd("Invalid or missing map\n", 2), 0);
 	fdfvalues(fdf);
 	drawstuff(fdf);
 	mlx_put_image_to_window (fdf->ptr, fdf->win, fdf->img, 0, 0);

@@ -6,29 +6,11 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:21:11 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/07 12:25:18 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/07 12:37:49 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	keyinput(int button, void *fdf)
-{
-	t_mlx	*mlx;
-
-	if (button == XK_Escape || button == 0)
-	{
-		mlx = (t_mlx *)fdf;
-		mlx_destroy_image(mlx->ptr, mlx->img);
-		mlx_destroy_window(mlx->ptr, mlx->win);
-		mlx_destroy_display(mlx->ptr);
-		free(mlx->ptr);
-		ft_freeint(mlx->map);
-		free(mlx);
-		exit(0);
-	}
-	return (0);
-}
 
 static int	pixelstodraw(t_mlx *fdf)
 {
@@ -42,27 +24,26 @@ static int	pixelstodraw(t_mlx *fdf)
 
 static void	drawline(t_mlx *fdf, int beginX, int beginY)
 {
-	int		pixels;
 	double	pixelx;
 	double	pixely;
 	int		x;
 	int		y;
+	int		index;
 
 	pixelx = beginX;
 	pixely = beginY;
-	pixels = fdf->pixels;
-	while (pixels)
+	while (fdf->pixels)
 	{
 		x = (int)pixelx;
 		y = (int)pixely;
 		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
 		{
-			int index = (y * fdf->size_line) + (x * (fdf->bpp / 8));
+			index = (y * fdf->size_line) + (x * (fdf->bpp / 8));
 			*(unsigned int *)(fdf->data + index) = 0x00FFFFFF;
 		}
 		pixelx += fdf->xd;
 		pixely += fdf->yd;
-		--pixels;
+		--fdf->pixels;
 	}
 }
 
