@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:58:27 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/07 11:44:13 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/07 11:52:52 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	fdfvalues(t_mlx *fdf)
 {
 	fdf->theta = 30 * M_PI / 180;
 	if (fdf->rows < fdf->cols)
-		fdf->scale = ((double)1000 / fdf->rows) / 2;
+		fdf->scale = ((double)HEIGHT / fdf->rows) / 2;
 	else
-		fdf->scale = ((double)1200 / fdf->cols) / 2;
+		fdf->scale = ((double)WIDTH / fdf->cols) / 2;
 }
 
 static int	numcol(t_mlx *fdf, char *av)

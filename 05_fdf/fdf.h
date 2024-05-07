@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:22:37 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/07 11:45:45 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/07 12:18:53 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ typedef struct s_mlx
 	int		cols;
 	int		rows;
 	double	theta;
-	double	x_rot;
-	double	y_rot;
-	double	x_rotnext;
-	double	y_rotnext;
+	double	xrot;
+	double	yrot;
+	double	xrotn;
+	double	yrotn;
 	double	scale;
+	double	xd;
+	double	yd;
+	int		pixels;
 	char	*data;
 	int		bpp;
 	int		size_line;
@@ -51,12 +54,10 @@ t_mlx	*initmlx(t_mlx *fdf, char *av);
 
 //02-mlxutils.c
 int		keyinput(int button, void *fdf);
+void    drawstuff(t_mlx *fdf);
 
 //03-utils.c
 void	ft_freeint(int **arr);
 void	ft_free(char **arr);
-
-
-
 
 #endif
