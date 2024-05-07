@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:24:15 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/06 18:16:36 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/07 11:47:45 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	main(int ac, char *av[])
 		fdf = initmlx(fdf, av[1]);
 		if (!fdf)
 			return (1);
-		if (intinput(av[1], fdf))
+		if (intinput(av[1], fdf) == -1)
 			return (ft_freeint(fdf->map), free(fdf), 1);
 	}
 	else

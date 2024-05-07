@@ -6,7 +6,7 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 12:22:37 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/06 14:33:26 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/07 11:45:45 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,19 @@ typedef struct s_mlx
 	int		endian;
 }			t_mlx;
 
-t_mlx	*initmlx(t_mlx *fdf, char *av);
+//01-input.c
+void	fdfvalues(t_mlx *fdf);
 int		intinput(char *av, t_mlx *fdf);
+t_mlx	*initmlx(t_mlx *fdf, char *av);
 
+//02-mlxutils.c
+int		keyinput(int button, void *fdf);
+
+//03-utils.c
 void	ft_freeint(int **arr);
 void	ft_free(char **arr);
 
-void	fdfvalues(t_mlx *fdf);
-int		keyinput(int button, void *fdf);
+
+
 
 #endif

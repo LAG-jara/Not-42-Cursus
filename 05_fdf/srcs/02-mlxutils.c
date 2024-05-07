@@ -6,20 +6,11 @@
 /*   By: cwan <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:21:11 by cwan              #+#    #+#             */
-/*   Updated: 2024/05/06 14:26:01 by cwan             ###   ########.fr       */
+/*   Updated: 2024/05/07 11:44:20 by cwan             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	fdfvalues(t_mlx *fdf)
-{
-	fdf->theta = 30 * M_PI / 180;
-	if (fdf->rows < fdf->cols)
-		fdf->scale = ((double)1000 / fdf->rows) / 2;
-	else
-		fdf->scale = ((double)1200 / fdf->cols) / 2;
-}
 
 int	keyinput(int button, void *fdf)
 {
